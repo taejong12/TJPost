@@ -5,11 +5,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>게시판 페이지</title>
+		<title>회원가입 페이지</title>
 	</head>
 	
 	<body>
-		<%@ include file="index.jsp" %>
-		게시판 페이지
+		<%@ include file="/index.jsp" %>
+		회원가입 페이지
+		
 	</body>
 </html>

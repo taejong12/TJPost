@@ -8,7 +8,8 @@
 	</head>
 	
 	<body>
-		<%@ include file="index.jsp" %>
+		<%@ include file="/index.jsp" %>
+		
 		<div class="container d-flex justify-content-center align-items-center" style="height: 60vh;">
 			<div class="col-lg-4">
 				<div class="card shadow" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">

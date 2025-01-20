@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+
+    <!-- TypeAlias 설정 (DTO 클래스에 대해 별칭을 지정) -->
+    <typeAliases>
+        <typeAlias type="com.board.tjpost.dto.BoardDTO" alias="BoardDTO"/>
+    </typeAliases>
+
+    <!-- 환경 설정 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC">
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+                <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+                <property name="username" value="C##TJPost"/>
+                <property name="password" value="1234"/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+                <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+                <property name="username" value="C##TJPost"/>
+                <property name="password" value="1234"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+	<!-- 매퍼 파일 경로 설정 -->
+    <mappers>
+        <mapper resource="mybatis/boardMapper.xml"/>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- spring-beans.xsd 파일을 인터넷에서 불러오지 못해서 에러발생-->
+<!-- 해당 에러를 해결하는 방법 -->
+<!-- 1.Maven 의존성 추가 확인 spring-beans/spring-context 2개 라이브러리 의존성 추가 -->
+<!-- 2.인터넷에서 다운로드를 차단한 환경에서는 로컬 경로를 사용. 로컬 경로로 XSD를 설정하려면 file:을 사용해야 함. -->
+<!-- file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/xsd/spring-beans.xsd 해당 부분을 자기 로컬 경로에 맞게 수정 -->
+<!-- 3.https://github.com/spring-projects/spring-framework 해당 주소 GitHub에서 최신 Spring XSD 파일 다운로드 -->
+<!-- spring-beans/src/main/resources/org/springframework/beans/factory/xml/spring-beans.xsd 해당 경로에 파일 위치 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/xsd/spring-beans.xsd">
+
+    <!-- DataSource 설정 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="username" value="C##TJPost"/>
+        <property name="password" value="1234"/>
+        <property name="maxTotal" value="10"/>
+    </bean>
+
+    <!-- SqlSessionFactory 설정 (MyBatis 설정) -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/> <!-- mybatis-config.xml 파일 경로 -->
+    </bean>
+
+    <!-- TransactionManager 설정 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- MyBatis Mapper 자동 스캔 설정 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.board.tjpost.dao"/> <!-- Mapper 인터페이스 위치(dao 인터페이스 위치) -->
+    </bean>
+
+</beans>

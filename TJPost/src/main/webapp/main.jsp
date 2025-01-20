@@ -8,7 +8,7 @@
 	</head>
 	
 	<body>
-		<%@ include file="index.jsp" %>
+		<%@ include file="/index.jsp" %>
 		메인 페이지
 	</body>
 </html>
