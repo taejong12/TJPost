@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example.board</groupId>
+	<artifactId>board_project</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<!-- 플러그인 Maven 빌드 도구에서 특정 작업을 자동으로 처리하는 데 사용 -->
+    	<plugins>
+	    	<plugin>
+	    		<!-- Java 소스 코드를 컴파일하는 플러그인 (자바 소스 파일을 컴파일하고 빌드를 진행하는데 사용)-->
+				<artifactId>maven-compiler-plugin</artifactId>
+				<!--플러그인 버전-->
+				<version>3.13.0</version>
+				<!--자바 17 버전을 사용하여 컴파일하겠다는 설정-->
+				<configuration>
+					<release>17</release>
+				</configuration>
+			</plugin>
+			
+			<!-- 프로젝트의 의존성 버전을 관리하고, 최신 버전 정보를 확인하는 플러그인 -->
+			<plugin>
+	            <groupId>org.codehaus.mojo</groupId>
+	            <!-- versions-maven-plugin은 프로젝트의 의존성 버전을 자동으로 업데이트하거나 확인하는 데 사용됩니다. -->
+	            <!-- 이 플러그인을 사용하면 프로젝트의 의존성 중에서 최신 버전이 있는지 확인하고, 버전 업그레이드를 쉽게 할 수 있습니다. -->
+	            <!-- 사용 방법 -->
+	            <!-- 1.cmd 관리자 권한 실행 -->
+	            <!-- 2.porm.xml 이 있는 폴더로 이동 -->
+	            <!-- 3.mvn versions:display-dependency-updates 명령어 실행 -->
+	            <!-- 4.현재 의존하고 있는 라이브러리 최신버전이 나오는지 확인 -->
+	            <!-- 5.해당하는 최신버전으로 라이브러리 수정 -->
+	            <artifactId>versions-maven-plugin</artifactId>
+	            <version>2.7</version> <!-- 최신 버전 확인 -->
+       		</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+    	<!-- Oracle JDBC Driver -->
+	    <dependency>
+	        <groupId>com.oracle.database.jdbc</groupId>
+	        <artifactId>ojdbc8</artifactId>
+	        <version>23.6.0.24.10</version> <!-- 최신 버전으로 업데이트 -->
+	    </dependency>
+	
+	    <!-- MyBatis -->
+	    <dependency>
+	        <groupId>org.mybatis</groupId>
+	        <artifactId>mybatis</artifactId>
+	        <version>3.5.19</version> <!-- 최신 버전으로 업데이트 -->
+	    </dependency>
+	    
+	    <dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>2.0.6</version> <!-- 최신 버전 확인 -->
+		</dependency>
+	</dependencies>
+</project>
