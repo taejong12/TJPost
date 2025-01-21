@@ -8,7 +8,7 @@
 	</head>
 	
 	<body>
-		<%@ include file="/index.jsp" %>
+		<%@ include file="/WEB-INF/views/index.jsp" %>
 		
 		<div class="container d-flex justify-content-center align-items-center" style="height: 60vh;">
 			<div class="col-lg-4">

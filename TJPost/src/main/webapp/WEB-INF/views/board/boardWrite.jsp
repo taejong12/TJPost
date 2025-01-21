@@ -9,11 +9,12 @@
 	</head>
 	
 	<body>
-		<%@ include file="/index.jsp" %>
+		<%@ include file="/WEB-INF/views/index.jsp" %>
 		
 		<div class="container mt-5">
 	        <h2 class="text-center">글 작성하기</h2>
-	        <form action="${pageContext.request.contextPath}/board/write" method="post">
+	        <!--  pageContext.request.contextPath는 현재 애플리케이션의 기본 경로를 포함하여 요청을 보낼 수 있도록 도와줍니다. -->
+	        <form action="${pageContext.request.contextPath}/write" method="post">
 	            <div class="form-group">
 	                <label for="boardTitle">제목</label>
 	                <input type="text" class="form-control" id="boardTitle" name="boardTitle" required>

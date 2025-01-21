@@ -15,7 +15,7 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
-
+    
     // 모든 게시글 리스트 보기
     @GetMapping("/list")
     public String getAllBoards(Model model) {
@@ -36,7 +36,7 @@ public class BoardController {
     // 게시글 작성 폼
     @GetMapping("/write")
     public String writeBoardForm() {
-        return "board/boardWrite"; // board/write.jsp
+        return "board/boardWrite"; // board/boardWrite.jsp
     }
 
     // 게시글 삽입 처리

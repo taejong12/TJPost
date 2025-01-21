@@ -9,7 +9,7 @@
 	</head>
 	
 	<body>
-		<%@ include file="/index.jsp" %>
+		<%@ include file="/WEB-INF/views/index.jsp" %>
 		
 		<div class="container mt-5">
 	        <h2 class="text-center">게시판</h2>

@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MyBatis Mapper 3.0//EN" 
-                        "file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.board.tjpost.dao.BoardDAO">
 
-    <!-- 모든 게시글 가져오기 -->
+    모든 게시글 가져오기
     <select id="getAllBoards" resultType="BoardDTO">
         SELECT * FROM BOARD
     </select>
 
-    <!-- 새로운 게시글 삽입 -->
+    새로운 게시글 삽입
     <insert id="insertBoard" parameterType="BoardDTO" useGeneratedKeys="true" keyProperty="boardId">
         INSERT INTO board (
         	board_id,
@@ -26,3 +25,4 @@
         )
     </insert>
 </mapper>
+ -->
