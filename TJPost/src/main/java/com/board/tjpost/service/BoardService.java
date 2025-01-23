@@ -24,19 +24,4 @@ public class BoardService {
     public void insertBoard(BoardDTO boardDTO) {
         boardDAO.insertBoard(boardDTO);
     }
-
-	/*
-	 * // 특정 게시글 가져오기 public BoardDTO getBoardById(int boardId) { return
-	 * boardDAO.getBoardById(boardId); }
-	 * 
-	 * // 게시글 삭제
-	 * 
-	 * @Transactional public void deleteBoard(int boardId) {
-	 * boardDAO.deleteBoard(boardId); }
-	 * 
-	 * // 게시글 수정
-	 * 
-	 * @Transactional public void updateBoard(BoardDTO boardDTO) {
-	 * boardDAO.updateBoard(boardDTO); }
-	 */
 }

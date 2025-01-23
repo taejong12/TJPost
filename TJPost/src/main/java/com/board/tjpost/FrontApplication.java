@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
 
 // Spring Boot 애플리케이션을 설정하는 기본적인 클래스
 // @SpringBootApplication 애너테이션을 사용하여 애플리케이션을 시작하는데 필요한 설정을 자동으로 처리하고, SpringBootServletInitializer 클래스를 확장하여 WAR 파일로 배포할 때도 애플리케이션이 제대로 작동하도록 설정합니다. 
@@ -20,16 +19,17 @@ import org.springframework.context.annotation.ComponentScan;
 // 이때 SpringBootServletInitializer 클래스를 상속받고 configure() 메서드를 오버라이드하여 WAR 파일로 배포할 수 있도록 설정합니다.
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.board.tjpost")
 public class FrontApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
 		//SpringApplication.run()을 사용하여 Spring Boot 애플리케이션을 실행하는 대신, configure() 메서드를 통해 애플리케이션을 초기화하는 방식으로 동작합니다.
 		SpringApplication.run(FrontApplication.class, args);
+		System.out.println("main 시작~~~~~~~~~~~~~~~~~~~~~~~");
 	}
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		System.out.println("톰캣 서버 main 시작~~~~~~~~~~~~~~~~~~~~~~~");
 		return builder.sources(FrontApplication.class);
 	}
 

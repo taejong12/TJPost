@@ -18,11 +18,11 @@
 		<ul class="nav nav-underline bg-light py-2">
 		
 			<li class="nav-item">
-				<a class="nav-link" href="#">메인</a>
+				<a class="nav-link" href="/">메인</a>
 			</li>
 			
 			<li class="nav-item">
-				<a class="nav-link" href="#">게시판</a>
+				<a class="nav-link" href="/board/list">게시판</a>
 			</li>
 			
 			<!-- 버튼 오른쪽 끝으로 이동 -->
@@ -36,10 +36,10 @@
 					</button>
 					
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">회원가입</a></li>
-						<li><a class="dropdown-item" href="#">로그인</a></li>
-						<li><a class="dropdown-item" href="#">로그아웃</a></li>
-						<li><a class="dropdown-item" href="#">마이페이지</a></li>
+						<li><a class="dropdown-item" href="/user/join">회원가입</a></li>
+						<li><a class="dropdown-item" href="/user/login">로그인</a></li>
+						<li><a class="dropdown-item" href="/user/logout">로그아웃</a></li>
+						<li><a class="dropdown-item" href="/user/mypage">마이페이지</a></li>
 					</ul>
 				</div>
 			</li>

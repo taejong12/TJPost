@@ -2,8 +2,11 @@ package com.board.tjpost.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.board.tjpost.dto.BoardDTO;
 
+@Mapper
 public interface BoardDAO {
 	
     List<BoardDTO> getAllBoards(); 			// 모든 게시글 가져오기
