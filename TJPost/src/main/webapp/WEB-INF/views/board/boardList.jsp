@@ -22,33 +22,30 @@
 					<td id="boardContent">내용</td>
 					<td id="boardAuthor">작성자</td>
 					<td id="boardCreatedDate">작성일자</td>
-					<!-- <td id="boardUpdatedDate">수정일자</td> -->
+					
 				</tr>
 				<c:choose>
 					<c:when test="${empty boardList}">
 						<tr>
-							<td colspan="6">등록된 게시물이 없습니다.</td>
+							<td colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${boardList}" var="boardList" >
+						<c:forEach var="boardList" items="${boardList}">
 							<tr>
 								<td>${boardList.boardId}</td>
 								<td>
-									<a href="/board/view?boardId=${boardList.boardId}">${boardList.boardTitle}</a>
+									${boardList.boardTitle}
 								</td>
 								<td>${boardList.boardContent}</td>
 								<td>${boardList.boardAuthor}</td>
-								<td>${boardList.boardCreatedDate}</td>
-								<%-- <td>${boardList.boardUpdatedDate}</td> --%>
+								<td>${boardList.boardCreatedDate}</td>	
 							</tr>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</table>
-	        
-	        
-	        
+
 	        <a href="/board/write" class="btn btn-primary mb-3">글 작성하기</a>
 	    </div>
 	</body>
