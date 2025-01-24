@@ -25,10 +25,22 @@
             SYSDATE
         )
     </insert>
+    
     <select id="selectBoardId" resultType="BoardDTO">
         SELECT * 
         FROM BOARD
         WHERE BOARD_ID=#{boardId}
     </select>
+    
+    <update id="updateBoard" parameterType="BoardDTO">
+	    UPDATE BOARD
+	    SET 
+	        BOARD_TITLE = #{boardTitle},
+	        BOARD_CONTENT = #{boardContent},
+	        BOARD_AUTHOR = #{boardAuthor},
+	        BOARD_UPDATED_DATE = SYSDATE
+	    WHERE 
+	        BOARD_ID = #{boardId}
+	</update>
     
 </mapper>

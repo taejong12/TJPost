@@ -54,6 +54,28 @@ public class BoardController {
     	return "board/boardView";
     }
     
+    //게시글 수정페이지
+    @GetMapping("/update/{boardId}")
+    public String boardUpdateById(@PathVariable Long boardId, Model model) {
+    	System.out.println("#### BoardController/board/update(get) ####");
+    	
+    	BoardDTO boardDTO =  boardService.selectBoardId(boardId);
+    	
+    	model.addAttribute("boardDTO", boardDTO);
+    	
+    	return "board/boardUpdate";
+    }
+    
+    //게시글 수정하기
+    @PostMapping("/update")
+    public String boardUpdate(BoardDTO boardDTO) {
+    	System.out.println("#### BoardController/board/update(post) ####");
+    	
+    	boardService.updateBoard(boardDTO);
+    	 	
+    	return "redirect:/board/list";
+    }
+    
     
     
 

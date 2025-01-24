@@ -32,6 +32,12 @@ public class BoardServiceImpl implements BoardService{
 	public BoardDTO selectBoardId(Long boardId) {
 		return boardDAO.selectBoardId(boardId);
 	}
+
+	//게시글 수정하기
+	@Override
+	public void updateBoard(BoardDTO boardDTO) {
+		boardDAO.updateBoard(boardDTO);
+	}
     
 	
 }

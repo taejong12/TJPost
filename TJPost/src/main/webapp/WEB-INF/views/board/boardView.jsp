@@ -50,7 +50,7 @@
 		    </table>
 		
 		    <div class="text-center mt-4">
-		        <a href="/board/update" class="btn btn-primary mr-2">게시글 수정하기</a>
+		        <a href="/board/update/${boardDTO.boardId}" class="btn btn-primary mr-2">게시글 수정하기</a>
 		        <a href="/board/delete" class="btn btn-danger">게시글 삭제하기</a>
 		    </div>
 		</div>

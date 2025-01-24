@@ -20,12 +20,13 @@ ADD LAST_UPDATED_DATE DATE DEFAULT SYSDATE;
 
 -- 유저 테이블 생성
 CREATE TABLE MEMBER (
-    MEMBER_ID VARCHAR2(50) PRIMARY KEY,   -- 사용자 아이디
-    MEMBER_PASSWORD VARCHAR2(255) NOT NULL,     -- 비밀번호
-    MEMBER_NAME VARCHAR2(100) NOT NULL,         -- 이름
-    MEMBER_EMAIL VARCHAR2(100) NOT NULL,                 -- 이메일
-    MEMBER_CREATED_DATE DATE DEFAULT SYSDATE,   -- 가입일 (기본값: 현재 날짜)
-    MEMBER_LAST_UPDATED_DATE DATE DEFAULT SYSDATE -- 수정일 (기본값: 현재 날짜)
+    MEMBER_ID VARCHAR2(50) PRIMARY KEY,             -- 사용자 아이디
+    MEMBER_PASSWORD VARCHAR2(255) NOT NULL,         -- 비밀번호
+    MEMBER_NAME VARCHAR2(100) NOT NULL,             -- 이름
+    MEMBER_EMAIL VARCHAR2(100) NOT NULL,            -- 이메일
+    MEMBER_CREATED_DATE DATE DEFAULT SYSDATE,       -- 가입일 (기본값: 현재 날짜)
+    MEMBER_LAST_UPDATED_DATE DATE DEFAULT SYSDATE   -- 수정일 (기본값: 현재 날짜)
+                                                    -- 마지막 접속일
 );
 
 DROP TABLE BOARD;

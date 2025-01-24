@@ -14,6 +14,9 @@ public interface BoardService {
     
     //게시글 상세보기
     public BoardDTO selectBoardId(Long boardId);
+
+    //게시글 수정하기
+	public void updateBoard(BoardDTO boardDTO);
     
     
 }
