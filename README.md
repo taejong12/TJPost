@@ -29,5 +29,22 @@ MyBatis Mapper DTD 파일 주소: https://raw.githubusercontent.com/mybatis/myba
 
 file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd 로컬 경로 설정
 
+=====================================================================================================================================================================
+
+2025.1.23 Bean 으로 설정하다가는 게시판 만들기 전에 끝날 것 같아서 스프링부트로 버전을 변경해서 작업하기로 결정
+
+개발 환경
+
+1.IDE: Eclipse IDE for Java Developers (includes Incubating components) Version: 2024-12 (4.34.0)
+2.Spring Boot 3.1.4
+3.JDK 17
+4.Builder: apache-maven-3.9.9
+5.sqldeveloper
+6.OracleXE213_Win64
+7.apache-tomcat-10.1.34
+8.JSP
+9.mybatis
+
+게시판 주요기능
 
 
