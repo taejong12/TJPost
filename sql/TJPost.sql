@@ -38,5 +38,6 @@ NOCACHE
 NOCYCLE;
 
 --system 에서 유저 권한 줘야 에러 없이 DB 에 저장 가능
+--QUOTA : 테이블 공간 사용 
 --ALTER USER C##TJPost DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS;
 
