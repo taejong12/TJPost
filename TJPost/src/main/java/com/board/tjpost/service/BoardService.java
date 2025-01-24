@@ -17,6 +17,9 @@ public interface BoardService {
 
     //게시글 수정하기
 	public void updateBoard(BoardDTO boardDTO);
+
+	//게시글 삭제하기
+	public void deleteBoard(Long boardId);
     
     
 }

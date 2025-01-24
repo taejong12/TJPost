@@ -38,6 +38,13 @@ public class BoardServiceImpl implements BoardService{
 	public void updateBoard(BoardDTO boardDTO) {
 		boardDAO.updateBoard(boardDTO);
 	}
+
+	//게시글 삭제하기
+	@Override
+	public void deleteBoard(Long boardId) {
+		boardDAO.deleteBoard(boardId);
+		
+	}
     
 	
 }

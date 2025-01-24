@@ -76,7 +76,15 @@ public class BoardController {
     	return "redirect:/board/list";
     }
     
-    
+    //게시글 삭제하기
+    @GetMapping("/delete/{boardId}")
+    public String boardDelete(@PathVariable Long boardId) {
+    	System.out.println("#### BoardController/board/delete ####");
+    	
+    	boardService.deleteBoard(boardId);
+    	 	
+    	return "redirect:/board/list";
+    }
     
 
 }
