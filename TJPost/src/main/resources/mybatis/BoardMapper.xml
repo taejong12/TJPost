@@ -5,7 +5,9 @@
 <mapper namespace="com.board.tjpost.dao.BoardDAO">
 
     <select id="getAllBoards" resultType="BoardDTO">
-        SELECT * FROM BOARD
+        SELECT * 
+        FROM BOARD
+        ORDER BY BOARD_ID DESC
     </select>
 
     <insert id="insertBoard" parameterType="BoardDTO" useGeneratedKeys="true">
@@ -23,4 +25,10 @@
             SYSDATE
         )
     </insert>
+    <select id="selectBoardId" resultType="BoardDTO">
+        SELECT * 
+        FROM BOARD
+        WHERE BOARD_ID=#{boardId}
+    </select>
+    
 </mapper>

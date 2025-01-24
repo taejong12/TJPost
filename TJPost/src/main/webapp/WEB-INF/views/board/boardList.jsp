@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>게시판 페이지</title>
+		<title>게시판 리스트 페이지</title>
 	</head>
 	
 	<body>
@@ -35,7 +35,7 @@
 							<tr>
 								<td>${boardList.boardId}</td>
 								<td>
-									${boardList.boardTitle}
+									<a href="/board/detail/${boardList.boardId}">${boardList.boardTitle}</a>
 								</td>
 								<td>${boardList.boardContent}</td>
 								<td>${boardList.boardAuthor}</td>

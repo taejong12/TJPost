@@ -24,12 +24,12 @@ public class FrontApplication extends SpringBootServletInitializer{
 	public static void main(String[] args) {
 		//SpringApplication.run()을 사용하여 Spring Boot 애플리케이션을 실행하는 대신, configure() 메서드를 통해 애플리케이션을 초기화하는 방식으로 동작합니다.
 		SpringApplication.run(FrontApplication.class, args);
-		System.out.println("main 시작~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("#### jar 내장 톰캣 사용 ####");
 	}
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		System.out.println("톰캣 서버 main 시작~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("#### war 패키징 외장 톰캣 사용 ####");
 		return builder.sources(FrontApplication.class);
 	}
 

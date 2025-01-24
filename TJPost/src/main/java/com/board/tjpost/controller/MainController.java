@@ -9,16 +9,9 @@ public class MainController {
 
 	@GetMapping("/")
     public String getMainPage() throws Exception{
-		System.out.println("메인 페이지");
+		System.out.println("#### MainController ####");
 		// /WEB-INF/views/main.jsp를 렌더링
 		return "main"; 
     }
 	
-	@RestController
-	public class TestController {
-	    @GetMapping("/test")
-	    public String test() {
-	        return "Application is running!";
-	    }
-	}
 }

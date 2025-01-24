@@ -10,6 +10,6 @@ import com.board.tjpost.dto.BoardDTO;
 public interface BoardDAO {
 	
     List<BoardDTO> getAllBoards(); 			// 모든 게시글 가져오기
-    void insertBoard(BoardDTO BoardDTO); 	// 새로운 게시글 삽입
-    
+    void insertBoard(BoardDTO boardDTO); 	// 새로운 게시글 삽입
+    BoardDTO selectBoardId(Long boardId);	// 게시글 상세보기
 }

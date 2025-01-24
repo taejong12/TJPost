@@ -13,7 +13,7 @@ public class BoardDTO {
     private String boardContent;		//게시글 내용
     private String boardAuthor;			//게시글 작성자
     private Date boardCreatedDate;		//게시글 작성일자
-//    private Date boardUpdatedDate;		//게시글 수정일자
+    private Date boardUpdatedDate;		//게시글 수정일자
     
 	public int getBoardId() {
 		return boardId;
@@ -44,6 +44,12 @@ public class BoardDTO {
 	}
 	public void setBoardCreatedDate(Date boardCreatedDate) {
 		this.boardCreatedDate = boardCreatedDate;
+	}
+	public Date getBoardUpdatedDate() {
+		return boardUpdatedDate;
+	}
+	public void setBoardUpdatedDate(Date boardUpdatedDate) {
+		this.boardUpdatedDate = boardUpdatedDate;
 	}
 
 }
