@@ -11,40 +11,39 @@ import com.board.tjpost.dto.BoardDTO;
 import com.board.tjpost.service.BoardService;
 
 @Service
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-    private BoardDAO boardDAO;
+	private BoardDAO boardDAO;
 
-    // 모든 게시글 가져오기
-    public List<BoardDTO> getAllBoards() {
-        return boardDAO.getAllBoards();
-    }
+	// 모든 게시글 가져오기
+	public List<BoardDTO> getAllBoards() {
+		return boardDAO.getAllBoards();
+	}
 
-    // 게시글 작성하기
-    @Transactional
-    public void insertBoard(BoardDTO boardDTO) {
-        boardDAO.insertBoard(boardDTO);
-    }
+	// 게시글 작성하기
+	@Transactional
+	public void insertBoard(BoardDTO boardDTO) {
+		boardDAO.insertBoard(boardDTO);
+	}
 
-    // 게시글 상세보기
+	// 게시글 상세보기
 	@Override
 	public BoardDTO selectBoardId(Long boardId) {
 		return boardDAO.selectBoardId(boardId);
 	}
 
-	//게시글 수정하기
+	// 게시글 수정하기
 	@Override
 	public void updateBoard(BoardDTO boardDTO) {
 		boardDAO.updateBoard(boardDTO);
 	}
 
-	//게시글 삭제하기
+	// 게시글 삭제하기
 	@Override
 	public void deleteBoard(Long boardId) {
 		boardDAO.deleteBoard(boardId);
-		
+
 	}
-    
-	
+
 }

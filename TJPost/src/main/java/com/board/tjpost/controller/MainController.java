@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
 	@GetMapping("/")
-    public String getMainPage() throws Exception{
+	public String getMainPage() throws Exception {
 		System.out.println("#### MainController ####");
 		// /WEB-INF/views/main.jsp를 렌더링
-		return "main"; 
-    }
-	
+		return "main";
+	}
+
 }

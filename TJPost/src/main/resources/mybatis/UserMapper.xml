@@ -18,4 +18,10 @@
         )
     </insert>
     
+    <select id="userIdCheck" parameterType="BoardDTO" resultType="Integer">
+    	SELECT COUNT(*)
+    	FROM MEMBER
+    	WHERE MEMBER_ID = #{memberId}
+    </select>
+    
 </mapper>
