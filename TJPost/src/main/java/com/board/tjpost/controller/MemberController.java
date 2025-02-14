@@ -7,67 +7,67 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.board.tjpost.dto.UserDTO;
-import com.board.tjpost.service.UserService;
+import com.board.tjpost.dto.MemberDTO;
+import com.board.tjpost.service.MemberService;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/member")
+public class MemberController {
 
 	@Autowired
-	private UserService userService;
+	private MemberService memberService;
 
 	// 회원가입 폼 이동
 	@GetMapping("/join")
-	public String userJoinPage() {
-		System.out.println("#### UserController/join(get) ####");
-		return "user/userJoin";
+	public String memberJoinPage() {
+		System.out.println("#### MemberController/join(get) ####");
+		return "member/memberJoin";
 	}
 
 	// 회원가입하기
 	@PostMapping("/join")
-	public String userJoin(UserDTO userDTO, Model model) {
-		System.out.println("#### UserController/join(post) ####");
+	public String memberJoin(MemberDTO memberDTO, Model model) {
+		System.out.println("#### MemberController/join(post) ####");
 
 		// 아이디 확인
-		int idCheck = userService.userIdCheck(userDTO);
+		int idCheck = memberService.memberIdCheck(memberDTO);
 
 		// 아이디 체크
 		if (idCheck > 0) {
 			System.out.println("이미 존재하는 아이디입니다.");
 			// 중복된 아이디 메시지를 Model에 전달
 			model.addAttribute("message", "이미 존재하는 아이디입니다.");
-			return "user/userJoin"; // join.jsp로 이동
+			return "member/memberJoin"; // join.jsp로 이동
 		} else {
 
 			// 회원가입
-			userService.insertUserJoin(userDTO);
+			memberService.insertMemberJoin(memberDTO);
 
-			return "redirect:/user/login";
+			return "redirect:/member/login";
 		}
 	}
 
 	// 로그인 창 이동
 	@GetMapping("/login")
-	public String userLoginPage() {
-		System.out.println("#### UserController/login ####");
-		return "user/userLogin";
+	public String memberLoginPage() {
+		System.out.println("#### MemberController/login ####");
+		return "member/memberLogin";
 	}
 
 	// 로그인 처리
 
 	// 로그아웃
 	@GetMapping("/logout")
-	public String userLogout() {
-		System.out.println("#### UserController/logout ####");
-		return "redirect:/user/login";
+	public String memberLogout() {
+		System.out.println("#### MemberController/logout ####");
+		return "redirect:/member/login";
 	}
 
 	// 마이페이지 이동
 	@GetMapping("/mypage")
-	public String userMypage() {
-		System.out.println("#### UserController/mypage ####");
-		return "user/userMypage";
+	public String memberMypage() {
+		System.out.println("#### MemberController/mypage ####");
+		return "member/memberMypage";
 	}
 
 }

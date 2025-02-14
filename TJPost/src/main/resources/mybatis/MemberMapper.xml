@@ -2,23 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.board.tjpost.dao.UserDAO">
+<mapper namespace="com.board.tjpost.dao.MemberDAO">
 
-    <insert id="insertUserJoin" parameterType="UserDTO" useGeneratedKeys="true">
+    <insert id="insertMemberJoin" parameterType="MemberDTO" useGeneratedKeys="true">
         INSERT INTO Member (
         	MEMBER_ID,
 			MEMBER_PASSWORD,
 			MEMBER_NAME,
+			MEMBER_PHONENUMBER,
 			MEMBER_EMAIL
         ) VALUES (
         	#{memberId},
             #{memberPassword}, 
             #{memberName},
+            #{memberPhoneNumber},
             #{memberEmail}
         )
     </insert>
     
-    <select id="userIdCheck" parameterType="BoardDTO" resultType="Integer">
+    <select id="memberIdCheck" parameterType="MemberDTO" resultType="Integer">
     	SELECT COUNT(*)
     	FROM MEMBER
     	WHERE MEMBER_ID = #{memberId}

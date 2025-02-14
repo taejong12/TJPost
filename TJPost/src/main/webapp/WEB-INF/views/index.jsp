@@ -36,10 +36,10 @@
 					접속하기</button>
 
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/user/join">회원가입</a></li>
-					<li><a class="dropdown-item" href="/user/login">로그인</a></li>
-					<li><a class="dropdown-item" href="/user/logout">로그아웃</a></li>
-					<li><a class="dropdown-item" href="/user/mypage">마이페이지</a></li>
+					<li><a class="dropdown-item" href="/member/join">회원가입</a></li>
+					<li><a class="dropdown-item" href="/member/login">로그인</a></li>
+					<li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
+					<li><a class="dropdown-item" href="/member/mypage">마이페이지</a></li>
 				</ul>
 			</div>
 		</li>
