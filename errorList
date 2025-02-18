@@ -1,0 +1,69 @@
+에러 기록
+=================================================================================================
+2025.2.18(화) 오전 9시
+로컬 실행 후 접속시 무한 루프 발생
+
+SecurityConfig.java
+
+memberLoginPage가 무수히 호출되는 것을 확인
+
+https://e1jong.tistory.com/255
+
+원인 헤더 역할로 index.jsp를 include를 받고 있어서 페이지를 호출할 때마다 걸려서 재호출
+
+스프링부트 3.0이상 스프링시큐리티 6.0 이상에서는 forward 방식에서도 기본적으로 인증이 걸리도록 변경돼서 무한루프에 빠짐
+(현재 스프링부트 3.1.4 스프링시큐리티 6.x)
+
+따라서 포워딩을 허용해준다는 설정을 추가해주면 된다
+
+request.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() 이게 핵심이다.
+
+무한루프 현상 해결
+
+=================================================================================================
+2025.2.18(화) 오전 10시
+스프링 시큐리티 해당 부분에서 에러 발생
+
+SecurityConfig.java
+
+.requestMatchers("/").permitAll()
+
+에러문구
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Unsatisfied dependency expressed through method 'setFilterChains' parameter 0: Error creating bean with name 'securityFilterChain' defined in class path resource [com/board/tjpost/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: This method cannot decide whether these patterns are Spring MVC patterns or not. If this endpoint is a Spring MVC endpoint, please use requestMatchers(MvcRequestMatcher); otherwise, please use requestMatchers(AntPathRequestMatcher).
+
+This is because there is more than one mappable servlet in your servlet context: {org.apache.jasper.servlet.JspServlet=[*.jspx, *.jsp], org.springframework.web.servlet.DispatcherServlet=[/]}.
+
+
+Spring Security에서 발생한 오류는 requestMatchers() 메서드가 Spring MVC 패턴인지 서블릿 패턴인지 명확히 구분할 수 없어서 생긴 문제입니다.
+
+Spring MVC 패턴(MvcRequestMatcher)
+1.Spring MVC 컨트롤러에서 사용하는 URL 매칭 방식입니다.
+2.DispatcherServlet을 통해 매핑됩니다
+3.예: @RequestMapping("/example")
+4.URL 패턴은 서블릿 컨텍스트에 상대적인 경로입니다.
+5.뷰 리졸버(ViewResolver)가 뷰를 찾아서 렌더링합니다.
+
+서블릿 패턴
+1.서블릿 레벨에서 URL을 매칭합니다.
+2.JSP나 서블릿과 같은 정적 자원도 포함됩니다.
+3.web.xml 이나 애너테이션을 사용해 매핑합니다.
+4.예: *.jsp, /static/*
+5.컨텍스트 루프를 포함한 URL로 매칭합니다.
+
+
+에러가 발생하는 이유
+Spring Security 6.x 이상부터는 requestMatchers() 가 Spring MVC와 서블릿 패턴을 자동으로 구분하지 않습니다.
+
+Spring Boot는 내부적으로 두 가지 서블릿을 사용 중입니다.
+1.JspServlet: *.jsp, *.jspx 와 같은 JSP 파일 처리
+2.DispatcherServlet: Spring MVC 컨트롤러의 모든 URL(/*)
+
+Spring MVC URL인지, JSP URL인지 명시를 해줘야 한다
+
+new MvcRequestMatcher / new AntPathRequestMatcher
+
+MvcRequestMatcher: Spring MVC 경로에만 적용, Spring MVC 경로만 분석
+AntPathRequestMatcher: 서블릿 수준에서 매칭, JSP, 정적 자원(.css, .js, .jpg 등)에 사용
+
+=================================================================================================
+
