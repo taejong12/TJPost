@@ -47,15 +47,15 @@
 							value="${boardDTO.boardAuthor}" class="form-control"></td>
 					</tr>
 					<tr>
-						<th>BOARD_CREATED_DATE</th>
-						<td><input type="text" id="boardCreatedDate"
-							name="boardCreatedDate" value="${boardDTO.boardCreatedDate}"
+						<th>BOARD_CREATE</th>
+						<td><input type="text" id="boardCreate"
+							name="boardCreate" value="${boardDTO.boardCreate}"
 							class="form-control" readonly></td>
 					</tr>
 					<tr>
-						<th>BOARD_UPDATED_DATE</th>
-						<td><input type="text" id="boardUpdatedDate"
-							name="boardUpdatedDate" value="${boardDTO.boardUpdatedDate}"
+						<th>BOARD_UPDATE</th>
+						<td><input type="text" id="boardUpdate"
+							name="boardUpdate" value="${boardDTO.boardUpdate}"
 							class="form-control" readonly></td>
 					</tr>
 				</tbody>

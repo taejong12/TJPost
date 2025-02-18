@@ -19,23 +19,23 @@ public class BoardController {
 	// 모든 게시글 리스트 보기
 	@GetMapping("/list")
 	public String getAllBoards(Model model) {
-		System.out.println("#### BoardController/board/list ####");
+		System.out.println("#### BoardController/getAllBoards ####");
 		List<BoardDTO> boardList = boardService.getAllBoards();
 		model.addAttribute("boardList", boardList);
 		return "board/boardList"; // board/list.jsp
 	}
 
 	// 게시글 작성 폼
-	@GetMapping("/write")
-	public String writeBoardForm() {
-		System.out.println("#### BoardController/board/write(get) ####");
-		return "board/boardWrite"; // board/boardWrite.jsp
+	@GetMapping("/insert")
+	public String insertBoardForm() {
+		System.out.println("#### BoardController/insertBoardForm ####");
+		return "board/boardInsert"; // board/boardWrite.jsp
 	}
 
 	// 게시글 삽입 처리
-	@PostMapping("/write")
+	@PostMapping("/insert")
 	public String insertBoard(BoardDTO boardDTO) {
-		System.out.println("#### BoardController/board/write(post) ####");
+		System.out.println("#### BoardController/insertBoard ####");
 		boardService.insertBoard(boardDTO);
 		return "redirect:/board/list"; // 작성 후 게시글 리스트로 리디렉션
 	}
@@ -45,19 +45,19 @@ public class BoardController {
 	// URL 경로에 정의된 변수 이름을 지정하여, 해당 값을 매핑하여 매개변수에 저장한다.
 	@GetMapping("/detail/{boardId}")
 	public String boardDetailById(@PathVariable Long boardId, Model model) {
-		System.out.println("#### BoardController/board/detail ####");
+		System.out.println("#### BoardController/boardDetailById ####");
 
 		BoardDTO boardDTO = boardService.selectBoardId(boardId);
 
 		model.addAttribute("boardDTO", boardDTO);
 
-		return "board/boardView";
+		return "board/boardDetail";
 	}
 
 	// 게시글 수정페이지
 	@GetMapping("/update/{boardId}")
 	public String boardUpdateById(@PathVariable Long boardId, Model model) {
-		System.out.println("#### BoardController/board/update(get) ####");
+		System.out.println("#### BoardController/boardUpdateById ####");
 
 		BoardDTO boardDTO = boardService.selectBoardId(boardId);
 
@@ -69,7 +69,7 @@ public class BoardController {
 	// 게시글 수정하기
 	@PostMapping("/update")
 	public String boardUpdate(BoardDTO boardDTO) {
-		System.out.println("#### BoardController/board/update(post) ####");
+		System.out.println("#### BoardController/boardUpdate ####");
 
 		boardService.updateBoard(boardDTO);
 
@@ -78,8 +78,8 @@ public class BoardController {
 
 	// 게시글 삭제하기
 	@GetMapping("/delete/{boardId}")
-	public String boardDelete(@PathVariable Long boardId) {
-		System.out.println("#### BoardController/board/delete ####");
+	public String deleteBoard(@PathVariable Long boardId) {
+		System.out.println("#### BoardController/deleteBoard ####");
 
 		boardService.deleteBoard(boardId);
 

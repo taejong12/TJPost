@@ -55,6 +55,7 @@ public class SecurityConfig {
 						.requestMatchers( new AntPathRequestMatcher("/")
 									,new AntPathRequestMatcher("/member/join")
 									,new AntPathRequestMatcher("/member/login")
+									,new AntPathRequestMatcher("/member/logout")									
 									,new AntPathRequestMatcher("/board/list")
 									,new AntPathRequestMatcher("/member/memberIdCheck")
 									,new AntPathRequestMatcher("/resources/**")).permitAll()
@@ -76,9 +77,10 @@ public class SecurityConfig {
 
 				// 로그아웃 설정
 				.logout(logout -> logout
-						.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+						.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout", "GET"))
 						// 로그아웃 성공 시 해당 url로 이동
 			            .logoutSuccessUrl("/member/login")
+			            .deleteCookies("JSESSIONID")
 						// 로그아웃은 누구나 가능
 						.permitAll());
 

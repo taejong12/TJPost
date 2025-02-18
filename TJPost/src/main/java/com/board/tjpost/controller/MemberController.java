@@ -72,13 +72,6 @@ public class MemberController {
 		return "main";
 	}
 
-	// 로그아웃
-	@GetMapping("/logout")
-	public String memberLogout() {
-		System.out.println("#### MemberController/memberLogout ####");
-		return "redirect:/member/login";
-	}
-
 	// 마이페이지 이동
 	@GetMapping("/mypage")
 	public String memberMypage() {

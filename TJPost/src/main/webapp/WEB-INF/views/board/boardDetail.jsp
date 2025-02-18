@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,21 +38,19 @@
 					<td>${boardDTO.boardAuthor}</td>
 				</tr>
 				<tr>
-					<th>BOARD_CREATED_DATE</th>
-					<td>${boardDTO.boardCreatedDate}</td>
+					<th>BOARD_CREATE</th>
+					<td>${boardDTO.boardCreate}</td>
 				</tr>
 				<tr>
-					<th>BOARD_UPDATED_DATE</th>
-					<td>${boardDTO.boardUpdatedDate}</td>
+					<th>BOARD_UPDATE</th>
+					<td>${boardDTO.boardUpdate}</td>
 				</tr>
 			</tbody>
 		</table>
 
 		<div class="text-center mt-4">
-			<a href="/board/update/${boardDTO.boardId}"
-				class="btn btn-primary mr-2">게시글 수정하기</a> <a
-				href="/board/delete/${boardDTO.boardId}" class="btn btn-danger mr-2">게시글
-				삭제하기</a>
+			<a href="/board/update/${boardDTO.boardId}"	class="btn btn-primary mr-2">게시글 수정하기</a>
+			<a href="/board/delete/${boardDTO.boardId}" class="btn btn-danger mr-2">게시글 삭제하기</a>
 		</div>
 	</div>
 </body>

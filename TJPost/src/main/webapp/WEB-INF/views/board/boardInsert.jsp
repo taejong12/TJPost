@@ -14,7 +14,7 @@
 	<div class="container mt-5 p-4 bg-light rounded shadow">
 		<h2 class="text-center mb-4 text-primary">글 작성하기</h2>
 
-		<form action="/board/write" method="post">
+		<form action="/board/insert" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="form-group mb-3">
 				<label for="boardTitle" class="form-label fw-bold">제목</label> <input

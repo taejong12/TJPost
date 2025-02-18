@@ -21,7 +21,7 @@
 				<td id="boardTitle">제목</td>
 				<td id="boardContent">내용</td>
 				<td id="boardAuthor">작성자</td>
-				<td id="boardCreatedDate">작성일자</td>
+				<td id="boardCreate">작성일자</td>
 
 			</tr>
 			<c:choose>
@@ -38,14 +38,14 @@
 							</td>
 							<td>${boardList.boardContent}</td>
 							<td>${boardList.boardAuthor}</td>
-							<td>${boardList.boardCreatedDate}</td>
+							<td>${boardList.boardCreate}</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
 
-		<a href="/board/write" class="btn btn-primary mb-3">글 작성하기</a>
+		<a href="/board/insert" class="btn btn-primary mb-3">글 작성하기</a>
 	</div>
 </body>
 </html>
