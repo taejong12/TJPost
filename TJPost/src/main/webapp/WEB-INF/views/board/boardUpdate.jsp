@@ -15,6 +15,7 @@
 	<div class="container mt-5">
 		<h2 class="text-center mb-4">게시글 수정하기</h2>
 		<form action="/board/update" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<table class="table table-striped table-bordered">
 				<thead class="thead-dark">
 					<tr>

@@ -17,15 +17,18 @@
 				<h3 class="text-center text-primary mb-4">로그인</h3>
 				
 				<form action="/member/login" method="post">
+					<!-- CSRF 토큰 설정 -->
+					<input type="hidden" name="_csrf" value="${_csrf.token}">
+					
 					<div class="mb-3">
-						<label for="memberId" class="form-label">아이디</label> <input
-							type="text" class="form-control" id="memberId" name="memberId"
+						<label for="memberId" class="form-label">아이디</label> 
+						<input type="text" class="form-control" id="memberId" name="memberId"
 							placeholder="아이디를 입력하세요" maxlength="20" required>
 					</div>
 
 					<div class="mb-3">
-						<label for="memberPassword" class="form-label">비밀번호</label> <input
-							type="password" class="form-control" id="memberPassword"
+						<label for="memberPassword" class="form-label">비밀번호</label> 
+						<input type="password" class="form-control" id="memberPassword"
 							name="memberPassword" placeholder="비밀번호를 입력하세요" maxlength="20"
 							required>
 					</div>
@@ -43,5 +46,4 @@
 	</div>
 
 </body>
-
 </html>

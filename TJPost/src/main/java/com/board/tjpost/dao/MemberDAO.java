@@ -11,5 +11,11 @@ public interface MemberDAO {
 	public void insertMemberJoin(MemberDTO memberDTO);
 
 	// 아이디 확인
-	public int memberIdCheck(MemberDTO memberDTO);
+	public int memberIdCheck(String memberId);
+
+	// 로그인 인증
+	public MemberDTO memberLoginCheck(String memberId);
+
+	// 권한 등록
+	public void insertAuthorities(String memberId);
 }

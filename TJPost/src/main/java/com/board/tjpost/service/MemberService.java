@@ -1,5 +1,7 @@
 package com.board.tjpost.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.board.tjpost.dto.MemberDTO;
 
 public interface MemberService {
@@ -8,5 +10,8 @@ public interface MemberService {
 	void insertMemberJoin(MemberDTO memberDTO);
 
 	// 아이디 확인하기
-	int memberIdCheck(MemberDTO memberDTO);
+	boolean memberIdCheck(String memberId);
+
+	// 회원 로그인 인증
+	UserDetails loadUserByUsername(String memberId);
 }

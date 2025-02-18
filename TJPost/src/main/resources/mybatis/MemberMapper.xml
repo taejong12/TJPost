@@ -20,10 +20,25 @@
         )
     </insert>
     
-    <select id="memberIdCheck" parameterType="MemberDTO" resultType="Integer">
+    <select id="memberIdCheck" parameterType="String" resultType="Integer">
     	SELECT COUNT(*)
     	FROM MEMBER
     	WHERE MEMBER_ID = #{memberId}
     </select>
     
+     <select id="memberLoginCheck" parameterType="String" resultType="MemberDTO">
+        SELECT m.MEMBER_ID, m.MEMBER_PASSWORD, m.MEMBER_ENABLED, a.AUTHORITIES_AUTHORITY
+        FROM member m
+        LEFT JOIN authorities a ON m.MEMBER_ID = a.MEMBER_ID
+        WHERE m.MEMBER_ID = #{memberId}
+    </select>
+    
+    <insert id="insertAuthorities" parameterType="String" useGeneratedKeys="true">
+        INSERT INTO AUTHORITIES (
+        	MEMBER_ID
+        ) VALUES (
+        	#{memberId}
+        )
+    </insert>
+
 </mapper>
