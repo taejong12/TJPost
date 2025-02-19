@@ -38,8 +38,14 @@
 					</div>
 				</form>
 
-				<div class="text-center">
+				<div class="d-grid mb-3 text-center">
 					<a href="/member/join" class="btn btn-outline-primary btn-sm w-100">회원가입</a>
+				</div>
+				
+				<div class="mb-3 text-center">
+					<a href="/oauth2/authorization/kakao">
+						<img width="300" height="47.6" alt="kakao" src="/img/kakao_login_btn.png">
+					</a>
 				</div>
 			</div>
 		</div>
