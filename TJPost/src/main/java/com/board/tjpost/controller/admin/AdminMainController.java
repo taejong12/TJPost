@@ -1,4 +1,4 @@
-package com.board.tjpost.controller;
+package com.board.tjpost.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminMainController {
 
 	@GetMapping("/")
-	public String getAdminMainPage() throws Exception {
-		System.out.println("#### AdminController ####");
+	public String selectAdminMainPage() throws Exception {
+		System.out.println("#### AdminMainController/selectAdminMainPage ####");
 		return "admin/adminMain";
 	}
 }

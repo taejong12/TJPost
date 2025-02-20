@@ -4,28 +4,28 @@
 
 <mapper namespace="com.board.tjpost.dao.BoardDAO">
 
-    <select id="getAllBoards" resultType="BoardDTO">
+    <select id="selectBoardAll" resultType="BoardDTO">
         SELECT * 
         FROM BOARD
         ORDER BY BOARD_ID DESC
     </select>
 
-    <insert id="insertBoard" parameterType="BoardDTO" useGeneratedKeys="true">
+    <insert id="insertBoard" parameterType="BoardDTO" useGeneratedKeys="true" keyProperty="boardId" keyColumn="BOARD_ID">
         INSERT INTO BOARD (
             BOARD_TITLE,
             BOARD_CONTENT,
-            BOARD_AUTHOR
+            MEMBER_ID
         ) VALUES (
             #{boardTitle},
-            #{boardContent},
-            #{boardAuthor}
+            #{boardContent},          
+            #{memberId}
         )
     </insert>
     
-    <select id="selectBoardId" resultType="BoardDTO">
+    <select id="selectBoardById" resultType="BoardDTO">
         SELECT * 
         FROM BOARD
-        WHERE BOARD_ID=#{boardId}
+        WHERE BOARD_ID = #{boardId}
     </select>
     
     <update id="updateBoard" parameterType="BoardDTO">
@@ -33,8 +33,8 @@
 	    SET 
 	        BOARD_TITLE = #{boardTitle},
 	        BOARD_CONTENT = #{boardContent},
-	        BOARD_AUTHOR = #{boardAuthor},
-	        BOARD_UPDATE = SYSDATE
+	        BOARD_UPDATE = SYSDATE,
+	        MEMBER_ID = #{memberId}
 	    WHERE 
 	        BOARD_ID = #{boardId}
 	</update>

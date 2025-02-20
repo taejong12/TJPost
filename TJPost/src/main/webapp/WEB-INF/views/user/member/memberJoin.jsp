@@ -13,7 +13,7 @@
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <%@ include file="/WEB-INF/views/index.jsp"%>
+    <%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
     <div class="container mt-5 p-4 bg-light rounded shadow">
         <h2 class="text-center mb-4 text-primary">회원가입</h2>
         <form action="/member/join" method="post">

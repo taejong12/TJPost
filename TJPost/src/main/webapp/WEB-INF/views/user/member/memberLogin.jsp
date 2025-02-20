@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<%@ include file="/WEB-INF/views/index.jsp"%>
+	<%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
 
 	<div class="container d-flex justify-content-center align-items-center"
 		style="height: 100vh;">
@@ -22,15 +22,12 @@
 					
 					<div class="mb-3">
 						<label for="memberId" class="form-label">아이디</label> 
-						<input type="text" class="form-control" id="memberId" name="memberId"
-							placeholder="아이디를 입력하세요" maxlength="20" required>
+						<input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디를 입력하세요" maxlength="20" required>
 					</div>
 
 					<div class="mb-3">
 						<label for="memberPassword" class="form-label">비밀번호</label> 
-						<input type="password" class="form-control" id="memberPassword"
-							name="memberPassword" placeholder="비밀번호를 입력하세요" maxlength="20"
-							required>
+						<input type="password" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호를 입력하세요" maxlength="20" required>
 					</div>
 
 					<div class="d-grid mb-3">
@@ -44,7 +41,7 @@
 				
 				<div class="mb-3 text-center">
 					<a href="/oauth2/authorization/kakao">
-						<img width="300" height="47.6" alt="kakao" src="/img/kakao_login_btn.png">
+						<img width="300" height="47.6" alt="kakao" src="/img/login/kakao_login_btn.png">
 					</a>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 package com.board.tjpost.dto;
 
+import java.io.File;
 import java.sql.Date;
 
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class MemberDTO {
 	private Date memberUpdate; // 회원_수정일(기본값: 현재날짜)
 
 	// AUTHORITIES 테이블
-	private int authoritiesId; // 회원권한_아이디(PK)
+	private Integer authoritiesId; // 회원권한_아이디(PK)
 	private String authoritiesAuthority; // 회원권한_권한(기본값: ROLE_USER(회원), ROLE_ADMIN(관리자))
 
 }

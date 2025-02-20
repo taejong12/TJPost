@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 상세보기 페이지</title>
+<title>공지사항 상세페이지</title>
 </head>
 
 <body>
-	<%@ include file="/WEB-INF/views/index.jsp"%>
+	<%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
 
 	<div class="container mt-5">
-		<h2 class="text-center mb-4">게시글 상세보기</h2>
+		<h2 class="text-center mb-4">공지사항 상세보기</h2>
 		<table class="table table-striped table-bordered">
 			<thead class="thead-dark">
 				<tr>
@@ -35,7 +35,7 @@
 				</tr>
 				<tr>
 					<th>BOARD_AUTHOR</th>
-					<td>${boardDTO.boardAuthor}</td>
+					<td>${boardDTO.memberId}</td>
 				</tr>
 				<tr>
 					<th>BOARD_CREATE</th>
@@ -49,8 +49,7 @@
 		</table>
 
 		<div class="text-center mt-4">
-			<a href="/board/update/${boardDTO.boardId}"	class="btn btn-primary mr-2">게시글 수정하기</a>
-			<a href="/board/delete/${boardDTO.boardId}" class="btn btn-danger mr-2">게시글 삭제하기</a>
+			<a href="/board/list" class="btn btn-primary mr-2">게시글 목록</a>
 		</div>
 	</div>
 </body>

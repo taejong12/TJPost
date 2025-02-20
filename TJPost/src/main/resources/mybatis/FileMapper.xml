@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.tjpost.dao.FileDAO">
+
+    <insert id="insertBoardFile" parameterType="FileDTO" useGeneratedKeys="true">
+        INSERT INTO COMMON_FILE (
+            FILE_NAME,
+            FILE_PATH,
+            FILE_ORIGINALNAME,
+            BOARD_ID
+        ) VALUES (
+            #{fileName},
+            #{filePath},
+            #{fileOriginalName},
+            #{boardId}
+        )
+    </insert>
+    
+	<select id="selectFileListByBoardId" resultType="FileDTO">
+		SELECT *
+		FROM COMMON_FILE
+		WHERE BOARD_ID = #{boardId}
+	</select>
+</mapper>
