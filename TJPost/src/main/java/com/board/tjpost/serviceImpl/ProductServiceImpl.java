@@ -77,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
 
 	// 상품 조회(아이디)
 	public ProductDTO selectProductById(Integer productId) {
-		return null;
+		return productDAO.selectProductById(productId);
 	}
 
 	// 상품 수정

@@ -25,4 +25,7 @@ public interface ProductDAO {
 	// 상품 검색
 	public List<ProductDTO> searchProductList(String searchKeyword);
 
+	// 상품 아아디 조회
+	public ProductDTO selectProductById(Integer productId);
+
 }

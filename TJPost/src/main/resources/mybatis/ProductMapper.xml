@@ -71,4 +71,11 @@
 		OR PRODUCT_CONTENT LIKE '%' || #{searchKeyword} || '%'
 		ORDER BY PRODUCT_ID DESC
 	</select>
+	
+	<select id="selectProductById" resultType="ProductDTO">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODUCT_ID = #{productId}
+	</select>
+
 </mapper>

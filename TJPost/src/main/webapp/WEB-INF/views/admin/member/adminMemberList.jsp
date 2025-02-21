@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 회원관리 페이지</title>
 </head>
 <body>
-
+	<%@ include file="/WEB-INF/views/admin/adminIndex.jsp"%>
+	
+	
 </body>
 </html>

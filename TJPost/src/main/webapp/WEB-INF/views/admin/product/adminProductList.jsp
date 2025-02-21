@@ -56,7 +56,7 @@
 						<tr>
 							<td>${adminProduct.productId}</td>
 							<td><a
-								href="/admin/product/detail/${adminProduct.productName}">${adminProduct.productName}</a>
+								href="/admin/product/detail/${adminProduct.productId}">${adminProduct.productName}</a>
 							</td>
 							<td>${adminProduct.productPrice}</td>
 							<td>${adminProduct.productStock}</td>

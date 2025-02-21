@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.board.tjpost.dto.FileDTO;
 import com.board.tjpost.dto.ProductDTO;
+import com.board.tjpost.service.FileService;
 import com.board.tjpost.service.ProductService;
 
 @Controller
@@ -22,7 +25,10 @@ public class AdminProductController {
 
 	@Autowired
 	ProductService productService;
-
+	
+	@Autowired
+	FileService fileService;
+	
 	@GetMapping("/list")
 	public String selectProductAllPaging(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "3") int limit,
@@ -72,4 +78,26 @@ public class AdminProductController {
 		productService.insertProduct(productDTO);
 		return "redirect:/admin/product/list";
 	}
+	
+	@GetMapping("/detail/{productId}")
+	public String adminProductDetailPage(@PathVariable Integer productId, Model model) {
+		
+		ProductDTO productDTO = productService.selectProductById(productId);
+		List<FileDTO> fileList = fileService.selectFileListByProductId(productId);
+		
+		model.addAttribute("productDTO", productDTO);
+		model.addAttribute("fileList", fileList);
+		
+		return "admin/product/adminProductDetail";
+	}
+	
+	@PostMapping("/update")
+	public String updateProductPage() {
+
+		
+		return "admin/product/adminProductDetail";
+	}
+	
+	
+	
 }

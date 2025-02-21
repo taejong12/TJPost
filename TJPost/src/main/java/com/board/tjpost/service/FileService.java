@@ -12,4 +12,10 @@ public interface FileService {
 	// 공지사항 전체 파일 조회
 	List<FileDTO> selectFileListByBoardIdAll();
 
+	// 상품 파일 전체 조회
+	List<FileDTO> selectFileListByProductIdAll();
+
+	// 상품 파일 아이디 조회
+	List<FileDTO> selectFileListByProductId(Integer productId);
+
 }

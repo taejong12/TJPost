@@ -22,10 +22,22 @@ public class FileServiceImpl implements FileService {
 	}
 
 
-	// 공지사항 파일 전체
+	// 공지사항 파일 전체 조회
 	@Override
 	public List<FileDTO> selectFileListByBoardIdAll() {
 		return fileDAO.selectFileListByBoardIdAll();
+	}
+
+
+	// 상품 파일 전체 조회
+	public List<FileDTO> selectFileListByProductIdAll() {
+		return fileDAO.selectFileListByProductIdAll();
+	}
+
+
+	// 상품 파일 아이디 조회
+	public List<FileDTO> selectFileListByProductId(Integer productId) {
+		return fileDAO.selectFileListByProductId(productId);
 	}
 
 }

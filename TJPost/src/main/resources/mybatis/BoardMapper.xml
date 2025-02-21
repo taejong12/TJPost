@@ -39,7 +39,7 @@
 	        BOARD_ID = #{boardId}
 	</update>
 	
-	<delete id="deleteBoard" parameterType="long">
+	<delete id="deleteBoard" parameterType="Integer">
 	    DELETE FROM BOARD
 	    WHERE BOARD_ID = #{boardId}
 	</delete>

@@ -73,8 +73,10 @@ public class AdminBoardController {
 		System.out.println("#### AdminBoardController/boardUpdateById ####");
 
 		BoardDTO boardDTO = boardService.selectBoardById(boardId);
-
+		List<FileDTO> fileList = fileService.selectFileListByBoardId(boardId);
+		
 		model.addAttribute("boardDTO", boardDTO);
+		model.addAttribute("fileList", fileList);
 
 		return "admin/board/adminBoardUpdate";
 	}

@@ -79,15 +79,77 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// 공지사항 수정
-	@Override
+	@Transactional
 	public void updateBoard(BoardDTO boardDTO) throws IllegalStateException, IOException {
 		
+		// 현재 로그인한 사용자 가져오기
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+	    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+	    
+		boardDTO.setMemberId(userDetails.getUsername());
+		
 		boardDAO.updateBoard(boardDTO);
+		
+		if(boardDTO.getBoardFiles() != null) {
+
+			List<FileDTO> deleteBoardFileList = fileDAO.selectFileListByBoardId(boardDTO.getBoardId());
+			
+			String parentPathName= "C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/static/img/board/";
+
+			 // 폴더 내 기존 파일 삭제
+	        for (FileDTO file : deleteBoardFileList) {
+	            File oldFile = new File(parentPathName, file.getFileName());
+	            if (oldFile.exists()) {
+	                oldFile.delete();  // 실제 파일 삭제
+	            }
+	        }
+
+			fileDAO.deleteBoardFileByBoardId(boardDTO.getBoardId());
+			
+			for(MultipartFile boardFile : boardDTO.getBoardFiles()) {
+				if(!boardFile.isEmpty()) {
+					String childPathName= UUID.randomUUID().toString() + "_" + boardFile.getOriginalFilename();
+					File saveBoardFile = new File(parentPathName, childPathName);
+					
+					if(!saveBoardFile.getParentFile().exists()) {
+						saveBoardFile.getParentFile().mkdir();
+					}
+					
+					boardFile.transferTo(saveBoardFile);
+					
+					String boardFilePath = parentPathName+childPathName;
+					
+					FileDTO fileDTO = new FileDTO();
+					fileDTO.setFileName(childPathName);
+					fileDTO.setFilePath(boardFilePath);
+					fileDTO.setFileOriginalName(boardFile.getOriginalFilename());
+					fileDTO.setBoardId(boardDTO.getBoardId());
+					
+					fileDAO.insertBoardFile(fileDTO);
+				}
+			}
+		}
 	}
 
 	// 공지사항 삭제하기
 	@Override
 	public void deleteBoard(Integer boardId) {
+		
+		List<FileDTO> deleteBoardFileList = fileDAO.selectFileListByBoardId(boardId);
+		
+		String parentPathName= "C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/static/img/board/";
+
+		 // 폴더 내 기존 파일 삭제
+        for (FileDTO file : deleteBoardFileList) {
+            File oldFile = new File(parentPathName, file.getFileName());
+            if (oldFile.exists()) {
+                oldFile.delete();  // 실제 파일 삭제
+            }
+        }
+
+		fileDAO.deleteBoardFileByBoardId(boardId);
+		
 		boardDAO.deleteBoard(boardId);
 
 	}

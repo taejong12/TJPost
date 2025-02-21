@@ -20,4 +20,13 @@ public interface FileDAO {
 	// 상품 파일 저장
 	void insertProductFile(FileDTO fileDTO);
 
+	// 상품 파일 전체 조회
+	List<FileDTO> selectFileListByProductIdAll();
+
+	// 상품 파일 아이디 조회
+	List<FileDTO> selectFileListByProductId(Integer productId);
+
+	// 공지사항 파일 삭제
+	void deleteBoardFileByBoardId(Integer boardId);
+
 }

@@ -43,4 +43,22 @@
             #{productId}
         )
     </insert>
+    
+    <select id="selectFileListByProductIdAll" resultType="FileDTO">
+		SELECT *
+		FROM COMMON_FILE
+		WHERE PRODUCT_ID IS NOT NULL
+	</select>
+    
+    <select id="selectFileListByProductId" resultType="FileDTO">
+		SELECT *
+		FROM COMMON_FILE
+		WHERE PRODUCT_ID = #{productId}
+	</select>
+	
+	
+	<delete id="deleteBoardFileByBoardId">
+		DELETE FROM COMMON_FILE
+		WHERE BOARD_ID = #{boardId}
+	</delete>
 </mapper>

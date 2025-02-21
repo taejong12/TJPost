@@ -11,7 +11,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/admin/adminIndex.jsp"%>
-/댓글/인기순/최근순
+
 	<div class="container mt-5">
 		<h2 class="text-center">공지사항</h2>
 
