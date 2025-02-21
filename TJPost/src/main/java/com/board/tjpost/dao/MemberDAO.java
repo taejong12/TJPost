@@ -1,5 +1,7 @@
 package com.board.tjpost.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.board.tjpost.dto.MemberDTO;
@@ -18,4 +20,7 @@ public interface MemberDAO {
 
 	// 권한 등록
 	public void insertAuthorities(String memberId);
+
+	// 회원 검색
+	public List<MemberDTO> searchMemberList(String searchKeyword);
 }

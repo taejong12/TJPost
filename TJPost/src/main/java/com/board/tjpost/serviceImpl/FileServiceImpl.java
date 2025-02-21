@@ -15,9 +15,17 @@ public class FileServiceImpl implements FileService {
 	@Autowired
 	FileDAO fileDAO;
 
+	// 공지사항 아이디 파일
 	@Override
 	public List<FileDTO> selectFileListByBoardId(Integer boardId) {
 		return fileDAO.selectFileListByBoardId(boardId);
+	}
+
+
+	// 공지사항 파일 전체
+	@Override
+	public List<FileDTO> selectFileListByBoardIdAll() {
+		return fileDAO.selectFileListByBoardIdAll();
 	}
 
 }

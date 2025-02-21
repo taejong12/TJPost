@@ -1,6 +1,5 @@
 package com.board.tjpost.dto;
 
-import java.io.File;
 import java.sql.Date;
 
 import lombok.Getter;

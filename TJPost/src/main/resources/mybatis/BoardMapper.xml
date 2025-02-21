@@ -44,4 +44,12 @@
 	    WHERE BOARD_ID = #{boardId}
 	</delete>
     
+    <select id="searchBoardList" resultType="BoardDTO">
+		SELECT *
+		FROM BOARD
+		WHERE BOARD_TITLE LIKE '%' || #{searchKeyword} || '%'
+		OR BOARD_CONTENT LIKE '%' || #{searchKeyword} || '%'
+		ORDER BY BOARD_ID DESC
+	</select>
+    
 </mapper>

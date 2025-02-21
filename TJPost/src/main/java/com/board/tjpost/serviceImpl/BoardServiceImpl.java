@@ -92,4 +92,9 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	// 공지사항 검색
+	public List<BoardDTO> searchBoardList(String searchKeyword) {
+		return boardDAO.searchBoardList(searchKeyword);
+	}
+
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.tjpost.dao.ProductDAO">
+
+	<insert id="insertProduct" parameterType="ProductDTO" useGeneratedKeys="true" keyProperty="productId" keyColumn="PRODUCT_ID">
+		INSERT INTO PRODUCT(
+			PRODUCT_NAME,
+			PRODUCT_PRICE,
+			PRODUCT_CONTENT,
+			PRODUCT_STOCK,
+			PRODUCT_CATEGORY,
+			MEMBER_ID
+		)
+		values(
+			#{productName},
+			#{productPrice},
+			#{productContent},
+			#{productStock},
+			#{productCategory},
+			#{memberId}
+		)
+	</insert>
+
+	<select id="selectProductAll" resultType="ProductDTO">
+		SELECT *
+		FROM PRODUCT
+		ORDER BY PRODUCT_ID DESC
+	</select>
+
+	<select id="selectProductAllPaging" parameterType="map" resultType="ProductDTO">
+		
+			SELECT *
+			FROM (
+				SELECT A.*, ROWNUM AS rnum
+				FROM (
+					SELECT *
+					FROM PRODUCT
+					<choose>
+		            	<!--  <when test="sort == 'sales'">
+		                    ORDER BY SALES_COUNT DESC
+		                </when> -->
+		                <when test="sort == 'highPrice'">
+		                	ORDER BY PRODUCT_PRICE DESC
+		                </when>
+		                <when test="sort == 'lowPrice'">
+		                	ORDER BY PRODUCT_PRICE ASC
+		                </when>
+		                <otherwise>
+		                	ORDER BY PRODUCT_ID DESC
+		                </otherwise>
+		            </choose>
+				) A
+				<![CDATA[
+				WHERE ROWNUM <= #{endRow}
+			)
+			WHERE rnum >= #{startRow}
+				]]>
+	</select>
+
+	<select id="selectProductTotalCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM PRODUCT
+	</select>
+	
+	<select id="searchProductList" resultType="ProductDTO">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODUCT_NAME LIKE '%' || #{searchKeyword} || '%'
+		OR PRODUCT_CONTENT LIKE '%' || #{searchKeyword} || '%'
+		ORDER BY PRODUCT_ID DESC
+	</select>
+</mapper>

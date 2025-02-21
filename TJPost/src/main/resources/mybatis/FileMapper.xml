@@ -4,7 +4,7 @@
 
 <mapper namespace="com.board.tjpost.dao.FileDAO">
 
-    <insert id="insertBoardFile" parameterType="FileDTO" useGeneratedKeys="true">
+    <insert id="insertBoardFile" parameterType="FileDTO">
         INSERT INTO COMMON_FILE (
             FILE_NAME,
             FILE_PATH,
@@ -23,4 +23,24 @@
 		FROM COMMON_FILE
 		WHERE BOARD_ID = #{boardId}
 	</select>
+	
+	<select id="selectFileListByBoardIdAll" resultType="FileDTO">
+		SELECT *
+		FROM COMMON_FILE
+		WHERE BOARD_ID IS NOT NULL
+	</select>
+	
+	<insert id="insertProductFile" parameterType="FileDTO">
+        INSERT INTO COMMON_FILE (
+            FILE_NAME,
+            FILE_PATH,
+            FILE_ORIGINALNAME,
+            PRODUCT_ID
+        ) VALUES (
+            #{fileName},
+            #{filePath},
+            #{fileOriginalName},
+            #{productId}
+        )
+    </insert>
 </mapper>

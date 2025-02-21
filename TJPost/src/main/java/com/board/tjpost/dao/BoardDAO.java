@@ -9,13 +9,21 @@ import com.board.tjpost.dto.BoardDTO;
 @Mapper
 public interface BoardDAO {
 
-	List<BoardDTO> selectBoardAll(); // 모든 게시글 가져오기
+	// 모든 공지사항 조회
+	List<BoardDTO> selectBoardAll(); 
 
-	void insertBoard(BoardDTO boardDTO); // 새로운 게시글 삽입
+	// 공지사항 삽입
+	void insertBoard(BoardDTO boardDTO); 
 
-	BoardDTO selectBoardById(Integer boardId); // 게시글 상세보기
+	// 공지사항 상세보기
+	BoardDTO selectBoardById(Integer boardId); 
 
-	void updateBoard(BoardDTO boardDTO); // 게시글 수정하기
+	// 공지사항 수정하기
+	void updateBoard(BoardDTO boardDTO); 
 
-	void deleteBoard(Integer boardId); // 게시글 삭제하기
+	// 공지사항 삭제하기
+	void deleteBoard(Integer boardId); 
+
+	// 공지사항 검색
+	List<BoardDTO> searchBoardList(String searchKeyword);
 }

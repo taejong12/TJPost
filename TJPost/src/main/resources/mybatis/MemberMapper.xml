@@ -40,5 +40,13 @@
         	#{memberId}
         )
     </insert>
+    
+    <select id="searchMemberList" resultType="MemberDTO">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_ID LIKE '%' || #{searchKeyword} || '%'
+		OR MEMBER_NAME LIKE '%' || #{searchKeyword} || '%'
+		ORDER BY MEMBER_CREATE DESC
+	</select>
 
 </mapper>

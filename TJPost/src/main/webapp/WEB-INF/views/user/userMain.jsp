@@ -46,54 +46,105 @@
 	</article>
 	
 	<div class="container p-5 my-5">
-		<div class="row">
-			<div class="col">
-				<table id="boardTable" class="table table-bordered">
-					<tr>
-						<td id="boardTitle">제목</td>
-					</tr>
-					<c:choose>
-						<c:when test="${empty boardList}">
-							<tr>
-								<td>등록된 게시물이 없습니다.</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="board" items="${boardList}">
-								<tr>
-									<td>
-										<a href="/board/detail/${board.boardId}">${board.boardTitle}</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</table>
-			</div>
-			<div class="col">
-				<table id="boardTable" class="table table-bordered">
-					<tr>
-						<td id="boardTitle">상품</td>
-					</tr>
-					<c:choose>
-						<c:when test="${empty boardList}">
-							<tr>
-								<td>등록된 상품이 없습니다.</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="board" items="${boardList}">
-								<tr>
-									<td>
-										<a href="/board/detail/${board.boardId}">${board.boardTitle}</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</table>
-			</div>
-		</div>
-	</div>
+        <!-- 첫 번째 게시판 섹션 -->
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <h2>공지사항</h2>
+                <div class="row">
+                    <c:forEach var="board" items="${boardList}" varStatus="statusBoard">
+                        <c:if test="${statusBoard.index < 9}">
+                            <div class="col-md-4 mb-4">
+                                <a href="/board/detail/${board.boardId}" class="text-decoration-none">
+                                    <div class="card">
+                                        <div class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                            	<c:set var="isFirst" value="true"/>
+                                                <c:forEach var="file" items="${fileList}">
+                                                    <c:if test="${file.boardId == board.boardId}">
+                                                        <div class="carousel-item ${isFirst ? 'active' : ''}">
+                                                            <img src="/img/board/${file.fileName}" alt="공지사항 이미지" class="d-block w-100" style="height: 200px;">
+                                                        </div>
+                                                        <c:set var="isFirst" value="false"/>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${board.boardTitle}</h5>
+                                            <p class="card-text">${board.boardContent}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>상품</h2>
+                <div class="row">
+                    <c:forEach var="board" items="${boardList2}" varStatus="status">
+                        <c:if test="${status.index < 9}">
+                            <div class="col-md-4 mb-4">
+                                <a href="/board/detail/${board.boardId}" class="text-decoration-none">
+                                    <div class="card">
+                                        <div id="carousel-${board.boardId}" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <c:forEach var="file" items="${fileList2}" varStatus="statusFile">
+                                                    <c:if test="${file.boardId == board.boardId}">
+                                                        <div class="carousel-item ${statusFile.first ? 'active' : ''}">
+                                                            <img src="/img/board/${file.fileName}" alt="공지사항 이미지" class="d-block w-100" style="height: 200px;">
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${board.boardTitle}</h5>
+                                            <p class="card-text">${board.boardContent}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 두 번째 게시판 섹션 -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2>Q&A</h2>
+                <div class="row">
+                    <c:forEach var="board" items="${boardList3}" varStatus="status">
+                        <c:if test="${status.index < 9}">
+                            <div class="col-md-4 mb-4">
+                                <a href="/board/detail/${board.boardId}" class="text-decoration-none">
+                                    <div class="card">
+                                        <div id="carousel-${board.boardId}" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <c:forEach var="file" items="${fileList3}" varStatus="statusFile">
+                                                    <c:if test="${file.boardId == board.boardId}">
+                                                        <div class="carousel-item ${statusFile.first ? 'active' : ''}">
+                                                            <img src="/img/board/${file.fileName}" alt="공지사항 이미지" class="d-block w-100" style="height: 200px;">
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${board.boardTitle}</h5>
+                                            <p class="card-text">${board.boardContent}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.board.tjpost.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -69,5 +71,10 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 				.disabled(memberEnabled) // 사용 여부: memberEnabled가 true이면 disabled는 false / true = 휴면, false = 사용
 				.authorities(memberDTO.getAuthoritiesAuthority()) // 권한 (권한이 여러 개일 경우 처리 필요)
 				.build();
+	}
+
+	// 회원 검색
+	public List<MemberDTO> searchMemberList(String searchKeyword) {
+		return memberDAO.searchMemberList(searchKeyword);
 	}
 }
