@@ -24,26 +24,27 @@ import com.board.tjpost.service.ProductService;
 public class AdminProductController {
 
 	@Autowired
-	ProductService productService;
-	
+	private ProductService productService;
+
 	@Autowired
-	FileService fileService;
-	
-	@GetMapping("/list")
-	public String selectProductAllPaging(@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "3") int limit,
-			@RequestParam(defaultValue = "latest") String sort, Model model) {
+	private FileService fileService;
+
+	// 상품 목록 페이징
+	@GetMapping("/listPaging")
+	public String selectProductListAllPaging(@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "3") int limit, @RequestParam(defaultValue = "latest") String sort,
+			Model model) {
 
 		int startRow = (page - 1) * limit + 1; // 시작 행 번호
 		int endRow = page * limit; // 끝 행 번호
 
 		Map<String, Object> paramMap = new HashMap<>();
-	    paramMap.put("startRow", startRow);
-	    paramMap.put("endRow", endRow);
-	    paramMap.put("sort", sort);
-		
+		paramMap.put("startRow", startRow);
+		paramMap.put("endRow", endRow);
+		paramMap.put("sort", sort);
+
 		// 상품 목록 조회
-		List<ProductDTO> adminProductList = productService.selectProductAllPaging(paramMap);
+		List<ProductDTO> adminProductList = productService.selectProductListAllPaging(paramMap);
 		int totalCount = productService.selectProductTotalCount(); // 전체 상품 개수
 
 		// 페이징 계산
@@ -64,40 +65,60 @@ public class AdminProductController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageBlock", pageBlock);
 		model.addAttribute("sort", sort);
-		
+
 		return "admin/product/adminProductList";
 	}
 
+	// 상품등록페이지
 	@GetMapping("/insert")
 	public String insertProductPage() {
 		return "admin/product/adminProductInsert";
 	}
 
+	// 상품등록
 	@PostMapping("/insert")
 	public String inserProduct(@ModelAttribute ProductDTO productDTO) {
 		productService.insertProduct(productDTO);
-		return "redirect:/admin/product/list";
+		return "redirect:/admin/product/listPaging";
 	}
-	
+
+	// 상품 상세페이지
 	@GetMapping("/detail/{productId}")
 	public String adminProductDetailPage(@PathVariable Integer productId, Model model) {
-		
-		ProductDTO productDTO = productService.selectProductById(productId);
-		List<FileDTO> fileList = fileService.selectFileListByProductId(productId);
-		
-		model.addAttribute("productDTO", productDTO);
-		model.addAttribute("fileList", fileList);
-		
-		return "admin/product/adminProductDetail";
-	}
-	
-	@PostMapping("/update")
-	public String updateProductPage() {
 
-		
+		ProductDTO adminProductDTO = productService.selectProductById(productId);
+		List<FileDTO> fileList = fileService.selectFileListByProductId(productId);
+
+		model.addAttribute("adminProductDTO", adminProductDTO);
+		model.addAttribute("fileList", fileList);
+
 		return "admin/product/adminProductDetail";
 	}
-	
-	
-	
+
+	// 상품 수정페이지
+	@GetMapping("/update/{productId}")
+	public String updateAdminProductPage(@PathVariable Integer productId, Model model) {
+
+		ProductDTO adminProductDTO = productService.selectProductById(productId);
+		List<FileDTO> fileList = fileService.selectFileListByProductId(productId);
+
+		model.addAttribute("adminProductDTO", adminProductDTO);
+		model.addAttribute("fileList", fileList);
+		return "admin/product/adminProductUpdate";
+	}
+
+	// 상품수정
+	@PostMapping("/update")
+	public String updateAdminProduct(@ModelAttribute ProductDTO productDTO) {
+		productService.updateProduct(productDTO);
+		return "redirect:/admin/product/listPaging";
+	}
+
+	// 상품삭제
+	@GetMapping("/delete/{productId}")
+	public String deleteProduct(@PathVariable Integer productId) {
+		productService.deleteProduct(productId);
+		return "redirect:/admin/product/listPaging";
+	}
+
 }

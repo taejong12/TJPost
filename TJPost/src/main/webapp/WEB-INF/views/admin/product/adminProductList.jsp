@@ -15,7 +15,7 @@
 		<!-- 정렬 옵션 & 상품 개수 선택을 가로 정렬 -->
 		<div class="d-flex align-items-center gap-3 mb-3 justify-content-end">
 		    <!-- 정렬 옵션 드롭다운 -->
-		    <form id="sortForm" action="/admin/product/list" method="get">
+		    <form id="sortForm" action="/admin/product/listPaging" method="get">
 		        <select name="sort" class="form-select" style="width: auto; display: inline-block;" onchange="document.getElementById('sortForm').submit();">
 		            <option value="latest" ${sort == 'latest' ? 'selected' : ''}>최신순</option>
 		            <option value="sales" ${sort == 'sales' ? 'selected' : ''}>판매량순</option>
@@ -25,7 +25,7 @@
 		    </form>
 		
 		    <!-- 상품 개수 선택 -->
-		    <form id="limitForm" action="/admin/product/list" method="get">
+		    <form id="limitForm" action="/admin/product/listPaging" method="get">
 		        <input type="hidden" name="sort" value="${sort}">
 		        <select name="limit" class="form-select" style="width: auto; display: inline-block;" onchange="document.getElementById('limitForm').submit();">
 		            <option value="3" ${limit == 3 ? 'selected' : ''}>3개</option>
@@ -43,12 +43,13 @@
 				<td id="productStock">상품재고</td>
 				<td id="productCategory">상품종류</td>
 				<td id="productCreate">상품생성일</td>
+				<td id="productUpdate">상품수정일</td>
 				<td id="memberId">상품등록아이디</td>
 			</tr>
 			<c:choose>
 				<c:when test="${empty adminProductList}">
 					<tr>
-						<td colspan="7">등록된 상품이 없습니다.</td>
+						<td colspan="8">등록된 상품이 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -62,6 +63,7 @@
 							<td>${adminProduct.productStock}</td>
 							<td>${adminProduct.productCategory}</td>
 							<td>${adminProduct.productCreate}</td>
+							<td>${adminProduct.productUpdate}</td>
 							<td>${adminProduct.memberId}</td>
 						</tr>
 					</c:forEach>
@@ -77,49 +79,49 @@
 					 <!-- 맨 처음 페이지 이동 버튼 -->
 		            <c:if test="${currentPage > 1}">
 		                <li class="page-item">
-		                    <a class="page-link" href="/admin/product/list?page=1&limit=${limit}&sort=${sort}">&laquo;&laquo;&laquo;</a>
+		                    <a class="page-link" href="/admin/product/listPaging?page=1&limit=${limit}&sort=${sort}">&laquo;&laquo;&laquo;</a>
 		                </li>
 		            </c:if>
 		            
 		             <!-- 이전 페이지 그룹 이동 버튼 -->
 		            <c:if test="${startPage > 1}">
 		                <li class="page-item">
-		                    <a class="page-link" href="/admin/product/list?page=${startPage - pageBlock}&limit=${limit}&sort=${sort}">&laquo;&laquo;</a>
+		                    <a class="page-link" href="/admin/product/listPaging?page=${startPage - pageBlock}&limit=${limit}&sort=${sort}">&laquo;&laquo;</a>
 		                </li>
 		            </c:if>
 		            
 					<!-- 이전 페이지 버튼 -->
 					<c:if test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="/admin/product/list?page=${currentPage - 1}&limit=${limit}&sort=${sort}">&laquo;</a>
+							<a class="page-link" href="/admin/product/listPaging?page=${currentPage - 1}&limit=${limit}&sort=${sort}">&laquo;</a>
 						</li>
 					</c:if>
 
 					<!-- 페이지 번호 -->
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<li class="page-item ${currentPage == i ? 'active' : ''}">
-							<a class="page-link" href="/admin/product/list?page=${i}&limit=${limit}&sort=${sort}">${i}</a>
+							<a class="page-link" href="/admin/product/listPaging?page=${i}&limit=${limit}&sort=${sort}">${i}</a>
 						</li>
 					</c:forEach>
 
 					<!-- 다음 페이지 버튼 -->
 					<c:if test="${currentPage < totalPage}">
 						<li class="page-item">
-							<a class="page-link" href="/admin/product/list?page=${currentPage + 1}&limit=${limit}&sort=${sort}">&raquo;</a>
+							<a class="page-link" href="/admin/product/listPaging?page=${currentPage + 1}&limit=${limit}&sort=${sort}">&raquo;</a>
 						</li>
 					</c:if>
 					
 					<!-- 다음 페이지 그룹 이동 버튼 -->
 		            <c:if test="${endPage < totalPage}">
 		                <li class="page-item">
-		                    <a class="page-link" href="/admin/product/list?page=${startPage + pageBlock}&limit=${limit}&sort=${sort}">&raquo;&raquo;</a>
+		                    <a class="page-link" href="/admin/product/listPaging?page=${startPage + pageBlock}&limit=${limit}&sort=${sort}">&raquo;&raquo;</a>
 		                </li>
 		            </c:if>
 					
 					<!-- 맨 마지막 페이지 이동 버튼 -->
 		            <c:if test="${currentPage < totalPage}">
 		                <li class="page-item">
-		                    <a class="page-link" href="/admin/product/list?page=${totalPage}&limit=${limit}">&raquo;&raquo;&raquo;</a>
+		                    <a class="page-link" href="/admin/product/listPaging?page=${totalPage}&limit=${limit}">&raquo;&raquo;&raquo;</a>
 		                </li>
 		            </c:if>
 				</ul>

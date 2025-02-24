@@ -25,13 +25,31 @@
                     <a class="nav-link text-white" href="/admin/">메인</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/admin/member/list">회원관리</a>
+                    <a class="nav-link text-white" href="/admin/member/listPaging">회원관리</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/admin/board/list">게시판관리</a>
+                    <a class="nav-link text-white" href="/admin/board/listPaging">공지사항관리</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/admin/product/list">상품관리</a>
+                    <a class="nav-link text-white" href="/admin/product/listPaging">상품관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/admin/Q&A/listPaging">Q&A관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/admin/purchase/listPaging">구매내역관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/admin/delivery/listPaging">배송관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/admin/event/listPaging">이벤트관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/admin/coupon/listPaging">쿠폰관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/admin/cancel/listPaging">취소/환불/교환 관리</a>
                 </li>
                 <li class="nav-item ms-auto d-flex gap-2">
 	                <a class="nav-link text-white" href="/member/logout">로그아웃</a>

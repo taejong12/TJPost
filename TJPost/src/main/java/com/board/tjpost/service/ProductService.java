@@ -12,7 +12,7 @@ public interface ProductService {
 	public List<ProductDTO> selectProductAll();
 
 	// 상품 목록 페이징 처리
-	public List<ProductDTO> selectProductAllPaging(Map<String, Object> paramMap);
+	public List<ProductDTO> selectProductListAllPaging(Map<String, Object> paramMap);
 	
 	// 상품 전체 갯수
 	public int selectProductTotalCount();

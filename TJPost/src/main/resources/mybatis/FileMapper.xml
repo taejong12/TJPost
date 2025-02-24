@@ -56,9 +56,14 @@
 		WHERE PRODUCT_ID = #{productId}
 	</select>
 	
-	
 	<delete id="deleteBoardFileByBoardId">
 		DELETE FROM COMMON_FILE
 		WHERE BOARD_ID = #{boardId}
 	</delete>
+	
+	<delete id="deleteProductFileByProductId">
+		DELETE FROM COMMON_FILE
+		WHERE PRODUCT_ID = #{productId}
+	</delete>
+
 </mapper>

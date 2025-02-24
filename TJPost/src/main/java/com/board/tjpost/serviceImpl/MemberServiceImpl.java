@@ -1,6 +1,7 @@
 package com.board.tjpost.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -22,7 +23,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	private MemberDAO memberDAO;
 
 	// 회원가입하기
-	@Override
 	public void insertMemberJoin(MemberDTO memberDTO) {
 		// 비밀번호 암호화
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -35,7 +35,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	}
 
 	// 아이디 확인하기
-	@Override
 	public boolean memberIdCheck(String memberId) {
 		boolean idCreating = true;
 
@@ -50,7 +49,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	}
 
 	// 로그인 인증
-	@Override
 	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
 		MemberDTO memberDTO = memberDAO.memberLoginCheck(memberId);
 
@@ -76,5 +74,20 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	// 회원 검색
 	public List<MemberDTO> searchMemberList(String searchKeyword) {
 		return memberDAO.searchMemberList(searchKeyword);
+	}
+
+	// 회원 목록 페이징
+	public List<MemberDTO> selectMemberListAllPaging(Map<String, Object> paramMap) {
+		return memberDAO.selectMemberListAllPaging(paramMap);
+	}
+
+	// 회원 총 인원
+	public int selectMemberTotalCount() {
+		return memberDAO.selectMemberTotalCount();
+	}
+
+	// 회원 정보
+	public MemberDTO selectMemberById(String memberId) {
+		return memberDAO.selectMemberById(memberId);
 	}
 }

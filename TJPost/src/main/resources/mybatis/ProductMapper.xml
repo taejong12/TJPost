@@ -29,8 +29,7 @@
 		ORDER BY PRODUCT_ID DESC
 	</select>
 
-	<select id="selectProductAllPaging" parameterType="map" resultType="ProductDTO">
-		
+	<select id="selectProductListAllPaging" parameterType="map" resultType="ProductDTO">
 			SELECT *
 			FROM (
 				SELECT A.*, ROWNUM AS rnum
@@ -77,5 +76,23 @@
 		FROM PRODUCT
 		WHERE PRODUCT_ID = #{productId}
 	</select>
-
+	
+	<update id="updateProduct" parameterType="ProductDTO">
+	    UPDATE PRODUCT
+	    SET 
+	        PRODUCT_NAME = #{productName},
+	        PRODUCT_PRICE = #{productPrice},
+	        PRODUCT_CONTENT = #{productContent},
+	        PRODUCT_STOCK = #{productStock},
+	        PRODUCT_CATEGORY = #{productCategory},
+	        PRODUCT_UPDATE = SYSDATE,
+	        MEMBER_ID = #{memberId}
+	    WHERE 
+	        PRODUCT_ID = #{productId}
+	</update>
+	
+	<delete id="deleteProduct" parameterType="Integer">
+	    DELETE FROM PRODUCT
+	    WHERE PRODUCT_ID = #{productId}
+	</delete>
 </mapper>

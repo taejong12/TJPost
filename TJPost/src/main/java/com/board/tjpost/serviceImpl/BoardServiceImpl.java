@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,6 +158,16 @@ public class BoardServiceImpl implements BoardService {
 	// 공지사항 검색
 	public List<BoardDTO> searchBoardList(String searchKeyword) {
 		return boardDAO.searchBoardList(searchKeyword);
+	}
+
+	// 공지사항 총 갯수
+	public int selectBoardTotalCount() {
+		return boardDAO.selectBoardTotalCount();
+	}
+
+	// 공지사항 목록 페이징
+	public List<BoardDTO> selectBoardListAllPaging(Map<String, Object> paramMap) {
+		return boardDAO.selectBoardListAllPaging(paramMap);
 	}
 
 }

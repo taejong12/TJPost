@@ -1,6 +1,7 @@
 package com.board.tjpost.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,4 +24,13 @@ public interface MemberDAO {
 
 	// 회원 검색
 	public List<MemberDTO> searchMemberList(String searchKeyword);
+
+	// 회원 목록 페이징
+	public List<MemberDTO> selectMemberListAllPaging(Map<String, Object> paramMap);
+
+	// 회원 총 인원
+	public int selectMemberTotalCount();
+
+	// 회원 정보
+	public MemberDTO selectMemberById(String memberId);
 }

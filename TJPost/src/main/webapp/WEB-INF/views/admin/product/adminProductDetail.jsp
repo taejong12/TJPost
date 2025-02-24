@@ -16,15 +16,15 @@
                 <div class="col-md-6">
                     <h4 class="mb-3">상품 정보</h4>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>상품번호:</strong> ${productDTO.productId}</li>
-                        <li class="list-group-item"><strong>상품이름:</strong> ${productDTO.productName}</li>
-                        <li class="list-group-item"><strong>상품가격:</strong> ${productDTO.productPrice} 원</li>
-                        <li class="list-group-item"><strong>상품내용:</strong> ${productDTO.productContent}</li>
-                        <li class="list-group-item"><strong>상품재고:</strong> ${productDTO.productStock} 개</li>
-                        <li class="list-group-item"><strong>상품종류:</strong> ${productDTO.productCategory}</li>
-                        <li class="list-group-item"><strong>상품생성일:</strong> ${productDTO.productCreate}</li>
-                        <li class="list-group-item"><strong>상품수정일:</strong> ${productDTO.productUpdate}</li>
-                        <li class="list-group-item"><strong>상품등록아이디:</strong> ${productDTO.memberId}</li>
+                        <li class="list-group-item"><strong>상품번호:</strong> ${adminProductDTO.productId}</li>
+                        <li class="list-group-item"><strong>상품이름:</strong> ${adminProductDTO.productName}</li>
+                        <li class="list-group-item"><strong>상품가격:</strong> ${adminProductDTO.productPrice} 원</li>
+                        <li class="list-group-item"><strong>상품내용:</strong> ${adminProductDTO.productContent}</li>
+                        <li class="list-group-item"><strong>상품재고:</strong> ${adminProductDTO.productStock} 개</li>
+                        <li class="list-group-item"><strong>상품종류:</strong> ${adminProductDTO.productCategory}</li>
+                        <li class="list-group-item"><strong>상품생성일:</strong> ${adminProductDTO.productCreate}</li>
+                        <li class="list-group-item"><strong>상품수정일:</strong> ${adminProductDTO.productUpdate}</li>
+                        <li class="list-group-item"><strong>상품등록아이디:</strong> ${adminProductDTO.memberId}</li>
                     </ul>
                 </div>
                 <div class="col-md-6 text-center">
@@ -36,7 +36,7 @@
                         <c:otherwise>
                             <div class="d-flex flex-wrap justify-content-center">
                                 <c:forEach var="file" items="${fileList}">
-                                	<c:if test="${file.productId == productDTO.productId}">
+                                	<c:if test="${file.productId == adminProductDTO.productId}">
 	                                    <div class="m-2">
 											<img src="/img/product/${file.fileName}" width="100" class="rounded shadow">
 											<p class="mt-2 small">${file.fileOriginalName}</p>
@@ -50,8 +50,8 @@
             </div>
         </div>
         <div class="text-center mt-4">
-            <a href="/admin/product/update/${productDTO.productId}" class="btn btn-primary mr-2">상품 수정</a>
-            <a href="/admin/product/delete/${productDTO.productId}" class="btn btn-danger">상품 삭제</a>
+            <a href="/admin/product/update/${adminProductDTO.productId}" class="btn btn-primary mr-2">상품 수정</a>
+            <a href="/admin/product/delete/${adminProductDTO.productId}" class="btn btn-danger">상품 삭제</a>
         </div>
     </div>
 	

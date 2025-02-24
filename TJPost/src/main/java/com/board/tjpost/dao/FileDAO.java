@@ -29,4 +29,7 @@ public interface FileDAO {
 	// 공지사항 파일 삭제
 	void deleteBoardFileByBoardId(Integer boardId);
 
+	// 상품 파일 삭제
+	void deleteProductFileByProductId(Integer productId);
+
 }

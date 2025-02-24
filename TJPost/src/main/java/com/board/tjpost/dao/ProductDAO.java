@@ -17,7 +17,7 @@ public interface ProductDAO {
 	public List<ProductDTO> selectProductAll();
 	
 	// 상품 조회 페이징 처리
-	public List<ProductDTO> selectProductAllPaging(Map<String, Object> paramMap);
+	public List<ProductDTO> selectProductListAllPaging(Map<String, Object> paramMap);
 
 	// 상품 전체 갯수
 	public int selectProductTotalCount();
@@ -27,5 +27,11 @@ public interface ProductDAO {
 
 	// 상품 아아디 조회
 	public ProductDTO selectProductById(Integer productId);
+
+	// 상품 수정
+	public void updateProduct(ProductDTO productDTO);
+
+	// 상품 삭제
+	public void deleteProduct(Integer productId);
 
 }

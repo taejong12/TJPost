@@ -4,6 +4,7 @@ import com.board.tjpost.dto.BoardDTO;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
 
@@ -24,4 +25,10 @@ public interface BoardService {
 
 	// 공지사항 검색
 	public List<BoardDTO> searchBoardList(String searchKeyword);
+
+	// 공지사항 총 갯수
+	public int selectBoardTotalCount();
+
+	// 공지사항 목록 페이징
+	public List<BoardDTO> selectBoardListAllPaging(Map<String, Object> paramMap);
 }

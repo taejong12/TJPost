@@ -49,4 +49,43 @@
 		ORDER BY MEMBER_CREATE DESC
 	</select>
 
+	<select id="selectMemberTotalCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
+	
+	<select id="selectMemberListAllPaging" parameterType="map" resultType="MemberDTO">
+			SELECT *
+			FROM (
+				SELECT A.*, ROWNUM AS rnum
+				FROM (
+					SELECT m.*, a.AUTHORITIES_AUTHORITY
+					FROM MEMBER m
+					LEFT JOIN AUTHORITIES a ON m.MEMBER_ID = a.MEMBER_ID
+					ORDER BY m.MEMBER_CREATE DESC
+					<!-- <choose>
+		                <when test="sort == 'highPrice'">
+		                	ORDER BY PRODUCT_PRICE DESC
+		                </when>
+		                <when test="sort == 'lowPrice'">
+		                	ORDER BY PRODUCT_PRICE ASC
+		                </when>
+		                <otherwise>
+		                	ORDER BY PRODUCT_ID DESC
+		                </otherwise>
+		            </choose> -->
+				) A
+				<![CDATA[
+				WHERE ROWNUM <= #{endRow}
+			)
+			WHERE rnum >= #{startRow}
+				]]>
+	</select>
+	
+	<select id="selectMemberById" resultType="MemberDTO">
+		SELECT m.*, a.AUTHORITIES_AUTHORITY
+		FROM MEMBER m
+		LEFT JOIN AUTHORITIES a ON m.MEMBER_ID = a.MEMBER_ID
+		WHERE m.MEMBER_ID = #{memberId}
+	</select>
 </mapper>

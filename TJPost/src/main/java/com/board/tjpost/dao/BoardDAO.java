@@ -1,6 +1,7 @@
 package com.board.tjpost.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -26,4 +27,10 @@ public interface BoardDAO {
 
 	// 공지사항 검색
 	List<BoardDTO> searchBoardList(String searchKeyword);
+
+	// 공지사항 총 갯수
+	int selectBoardTotalCount();
+
+	// 공지사항 목록 페이징
+	List<BoardDTO> selectBoardListAllPaging(Map<String, Object> paramMap);
 }

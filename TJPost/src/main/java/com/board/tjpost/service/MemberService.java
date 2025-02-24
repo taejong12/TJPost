@@ -1,6 +1,7 @@
 package com.board.tjpost.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,6 +20,15 @@ public interface MemberService {
 
 	// 회원 검색
 	List<MemberDTO> searchMemberList(String searchKeyword);
+
+	// 회원 목록 페이징
+	List<MemberDTO> selectMemberListAllPaging(Map<String, Object> paramMap);
+
+	// 회원 총 인원
+	int selectMemberTotalCount();
+
+	// 회원 정보
+	MemberDTO selectMemberById(String memberId);
 
 
 }

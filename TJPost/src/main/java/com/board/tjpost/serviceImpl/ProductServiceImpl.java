@@ -83,16 +83,85 @@ public class ProductServiceImpl implements ProductService {
 	// 상품 수정
 	public void updateProduct(ProductDTO productDTO) {
 
+		// 현재 로그인한 사용자 가져오기
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+		productDTO.setMemberId(userDetails.getUsername());
+
+		productDAO.updateProduct(productDTO);
+
+		if (productDTO.getProductFiles() != null) {
+
+			List<FileDTO> deleteProductFileList = fileDAO.selectFileListByProductId(productDTO.getProductId());
+
+			String parentPathName = "C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/static/img/product/";
+
+			// 폴더 내 기존 파일 삭제
+			for (FileDTO file : deleteProductFileList) {
+				File oldFile = new File(parentPathName, file.getFileName());
+				if (oldFile.exists()) {
+					oldFile.delete(); // 실제 파일 삭제
+				}
+			}
+
+			fileDAO.deleteProductFileByProductId(productDTO.getProductId());
+
+			for (MultipartFile productFile : productDTO.getProductFiles()) {
+				if (!productFile.isEmpty()) {
+					String childPathName = UUID.randomUUID().toString() + "_" + productFile.getOriginalFilename();
+					File saveProductFile = new File(parentPathName, childPathName);
+
+					if (!saveProductFile.getParentFile().exists()) {
+						saveProductFile.getParentFile().mkdir();
+					}
+
+					try {
+						productFile.transferTo(saveProductFile);
+					} catch (Exception e) {
+						System.out.println("상품 파일 수정 실패");
+						e.printStackTrace();
+					}
+
+					String productFilePath = parentPathName + childPathName;
+
+					FileDTO fileDTO = new FileDTO();
+					fileDTO.setFileName(childPathName);
+					fileDTO.setFilePath(productFilePath);
+					fileDTO.setFileOriginalName(productFile.getOriginalFilename());
+					fileDTO.setProductId(productDTO.getProductId());
+
+					fileDAO.insertProductFile(fileDTO);
+				}
+			}
+		}
+
 	}
 
 	// 상품 삭제
 	public void deleteProduct(Integer productId) {
+		
+		List<FileDTO> deleteProductFileList = fileDAO.selectFileListByProductId(productId);
+		
+		String parentPathName= "C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/static/img/product/";
 
+		 // 폴더 내 기존 파일 삭제
+        for (FileDTO file : deleteProductFileList) {
+            File oldFile = new File(parentPathName, file.getFileName());
+            if (oldFile.exists()) {
+                oldFile.delete();  // 실제 파일 삭제
+            }
+        }
+
+		fileDAO.deleteProductFileByProductId(productId);
+		
+		productDAO.deleteProduct(productId);
 	}
 
 	// 상품 목록 페이징처리
-	public List<ProductDTO> selectProductAllPaging(Map<String, Object> paramMap) {
-		return productDAO.selectProductAllPaging(paramMap);
+	public List<ProductDTO> selectProductListAllPaging(Map<String, Object> paramMap) {
+		return productDAO.selectProductListAllPaging(paramMap);
 	}
 
 	// 상품 전체 갯수

@@ -52,4 +52,36 @@
 		ORDER BY BOARD_ID DESC
 	</select>
     
+    <select id="selectBoardTotalCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM BOARD
+	</select>
+	
+	<select id="selectBoardListAllPaging" parameterType="map" resultType="BoardDTO">
+			SELECT *
+			FROM (
+				SELECT A.*, ROWNUM AS rnum
+				FROM (
+					SELECT *
+					FROM BOARD
+					ORDER BY BOARD_ID DESC
+					<!-- <choose>
+		                <when test="sort == 'highPrice'">
+		                	ORDER BY PRODUCT_PRICE DESC
+		                </when>
+		                <when test="sort == 'lowPrice'">
+		                	ORDER BY PRODUCT_PRICE ASC
+		                </when>
+		                <otherwise>
+		                	ORDER BY PRODUCT_ID DESC
+		                </otherwise>
+		            </choose> -->
+				) A
+				<![CDATA[
+				WHERE ROWNUM <= #{endRow}
+			)
+			WHERE rnum >= #{startRow}
+				]]>
+	</select>
+	
 </mapper>
