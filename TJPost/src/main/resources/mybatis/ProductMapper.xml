@@ -23,7 +23,7 @@
 		)
 	</insert>
 
-	<select id="selectProductAll" resultType="ProductDTO">
+	<select id="selectProductListAll" resultType="ProductDTO">
 		SELECT *
 		FROM PRODUCT
 		ORDER BY PRODUCT_ID DESC

@@ -59,10 +59,10 @@
                                         <div class="carousel slide" data-bs-ride="carousel">
                                             <div class="carousel-inner">
                                             	<c:set var="isFirst" value="true"/>
-                                                <c:forEach var="file" items="${fileList}">
-                                                    <c:if test="${file.boardId == board.boardId}">
+                                                <c:forEach var="boardFile" items="${boardFileList}">
+                                                    <c:if test="${board.boardId == boardFile.boardId}">
                                                         <div class="carousel-item ${isFirst ? 'active' : ''}">
-                                                            <img src="/img/board/${file.fileName}" alt="공지사항 이미지" class="d-block w-100" style="height: 200px;">
+                                                            <img src="/img/board/${boardFile.fileName}" alt="공지사항 이미지" class="d-block w-100" style="height: 200px;">
                                                         </div>
                                                         <c:set var="isFirst" value="false"/>
                                                     </c:if>
@@ -83,25 +83,27 @@
             <div class="col-md-6">
                 <h2>상품</h2>
                 <div class="row">
-                    <c:forEach var="board" items="${boardList2}" varStatus="status">
-                        <c:if test="${status.index < 9}">
+                    <c:forEach var="product" items="${productList}" varStatus="statusProduct">
+                        <c:if test="${statusProduct.index < 9}">
                             <div class="col-md-4 mb-4">
-                                <a href="/board/detail/${board.boardId}" class="text-decoration-none">
+                                <a href="/product/detail/${product.productId}" class="text-decoration-none">
                                     <div class="card">
-                                        <div id="carousel-${board.boardId}" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel slide" data-bs-ride="carousel">
                                             <div class="carousel-inner">
-                                                <c:forEach var="file" items="${fileList2}" varStatus="statusFile">
-                                                    <c:if test="${file.boardId == board.boardId}">
-                                                        <div class="carousel-item ${statusFile.first ? 'active' : ''}">
-                                                            <img src="/img/board/${file.fileName}" alt="공지사항 이미지" class="d-block w-100" style="height: 200px;">
+                                            	<c:set var="isFirst" value="true"/>
+                                                <c:forEach var="productFile" items="${productFileList}" >
+                                                    <c:if test="${productFile.productId == product.productId}">
+                                                        <div class="carousel-item ${isFirst ? 'active' : ''}">
+                                                            <img src="/img/product/${productFile.fileName}" alt="상품 이미지" class="d-block w-100" style="height: 200px;">
                                                         </div>
+                                                        <c:set var="isFirst" value="false"/>
                                                     </c:if>
                                                 </c:forEach>
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">${board.boardTitle}</h5>
-                                            <p class="card-text">${board.boardContent}</p>
+                                            <h5 class="card-title">${product.productName}</h5>
+                                            <p class="card-text">${product.productPrice}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -122,7 +124,7 @@
                             <div class="col-md-4 mb-4">
                                 <a href="/board/detail/${board.boardId}" class="text-decoration-none">
                                     <div class="card">
-                                        <div id="carousel-${board.boardId}" class="carousel slide" data-bs-ride="carousel">
+                                        <div id="${board.boardId}" class="carousel slide" data-bs-ride="carousel">
                                             <div class="carousel-inner">
                                                 <c:forEach var="file" items="${fileList3}" varStatus="statusFile">
                                                     <c:if test="${file.boardId == board.boardId}">

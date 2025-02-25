@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +24,6 @@ public class MemberController {
 	// 회원가입 폼 이동
 	@GetMapping("/join")
 	public String memberJoinPage() {
-		System.out.println("#### MemberController/memberJoinPage ####");
 		return "user/member/memberJoin";
 	}
 
@@ -30,51 +31,57 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/memberIdCheck")
 	public boolean memberIdCheck(@RequestParam("memberId") String memberId) {
-		System.out.println("#### MemberController/memberIdCheck ####");
-
-		System.out.println("memberId: " + memberId);
-
 		// 아이디 중복 확인
 		boolean idCreating = memberService.memberIdCheck(memberId);
-
-		if (idCreating) {
-			System.out.println("아이디 생성 가능");
-		} else {
-			System.out.println("이미 존재하는 아이디입니다.");
-		}
-
 		return idCreating;
 	}
 
 	// 회원가입하기
 	@PostMapping("/join")
 	public String memberJoin(MemberDTO memberDTO, Model model) {
-		System.out.println("#### MemberController/memberJoin ####");
-
-		// 회원가입
 		memberService.insertMemberJoin(memberDTO);
-
 		return "redirect:/user/member/login";
 	}
 
 	// 로그인 창 이동
 	@GetMapping("/login")
 	public String memberLoginPage() {
-		System.out.println("#### MemberController/memberLoginPage ####");
 		return "user/member/memberLogin";
 	}
 
 	// 로그인 처리
 	@PostMapping("/login")
 	public void memberLogin(MemberDTO memberDTO) {
-		System.out.println("#### MemberController/memberLogin ####");
 		memberService.loadUserByUsername(memberDTO.getMemberId());
 	}
 
-	// 마이페이지 이동
+	// 내정보페이지
 	@GetMapping("/mypage")
-	public String memberMyPage() {
-		System.out.println("#### MemberController/memberMypage ####");
+	public String memberMyPage(Model model) {
+		MemberDTO memberDTO = memberService.selectMemberInfo();
+		model.addAttribute("memberDTO", memberDTO);
 		return "user/member/memberMypage";
+	}
+	
+	// 회원정보 수정페이지
+	@GetMapping("/update")
+	public String updateMemberPage(Model model) {
+		MemberDTO memberDTO = memberService.selectMemberInfo();
+		model.addAttribute("memberDTO", memberDTO);
+		return "user/member/memberUpdate";
+	}
+	
+	// 회원정보수정
+	@PostMapping("/update")
+	public String updateMember(@ModelAttribute MemberDTO memberDTO) {
+		memberService.updateMember(memberDTO);
+		return "redirect:/member/mypage";
+	}
+	
+	// 회원삭제
+	@GetMapping("/delete/{memberId}")
+	public String deleteMember(@PathVariable String memberId) {
+		memberService.deleteMember(memberId);
+		return "redirect:/member/logout";
 	}
 }

@@ -91,10 +91,10 @@ public class AdminBoardController {
 	public String selectBoardById(@PathVariable Integer boardId, Model model) {
 		System.out.println("#### AdminBoardController/selectBoardById ####");
 
-		BoardDTO boardDTO = boardService.selectBoardById(boardId);
+		BoardDTO adminBoardDTO = boardService.selectBoardById(boardId);
 		List<FileDTO> fileList = fileService.selectFileListByBoardId(boardId);
 
-		model.addAttribute("boardDTO", boardDTO);
+		model.addAttribute("adminBoardDTO", adminBoardDTO);
 		model.addAttribute("fileList", fileList);
 
 		return "admin/board/adminBoardDetail";
@@ -105,10 +105,10 @@ public class AdminBoardController {
 	public String boardUpdateById(@PathVariable Integer boardId, Model model) {
 		System.out.println("#### AdminBoardController/boardUpdateById ####");
 
-		BoardDTO boardDTO = boardService.selectBoardById(boardId);
+		BoardDTO adminBoardDTO = boardService.selectBoardById(boardId);
 		List<FileDTO> fileList = fileService.selectFileListByBoardId(boardId);
 
-		model.addAttribute("boardDTO", boardDTO);
+		model.addAttribute("adminBoardDTO", adminBoardDTO);
 		model.addAttribute("fileList", fileList);
 
 		return "admin/board/adminBoardUpdate";

@@ -88,4 +88,19 @@
 		LEFT JOIN AUTHORITIES a ON m.MEMBER_ID = a.MEMBER_ID
 		WHERE m.MEMBER_ID = #{memberId}
 	</select>
+	
+	<update id="updateMember" parameterType="MemberDTO">
+		UPDATE MEMBER
+	    SET 
+	        MEMBER_PHONENUMBER = #{memberPhoneNumber},
+	        MEMBER_EMAIL = #{memberEmail},
+	        MEMBER_UPDATE = SYSDATE
+	    WHERE 
+	        MEMBER_ID = #{memberId} 
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER
+		WHERE MEMBER_ID = #{memberId} 
+	</delete>
 </mapper>

@@ -7,6 +7,6 @@
 <title>검색 페이지</title>
 </head>
 <body>
-	검색 페이지 노출 목록
+	<%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
 </body>
 </html>

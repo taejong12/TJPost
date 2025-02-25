@@ -11,7 +11,7 @@ import com.board.tjpost.dto.BoardDTO;
 public interface BoardDAO {
 
 	// 모든 공지사항 조회
-	List<BoardDTO> selectBoardAll(); 
+	List<BoardDTO> selectBoardListAll(); 
 
 	// 공지사항 삽입
 	void insertBoard(BoardDTO boardDTO); 

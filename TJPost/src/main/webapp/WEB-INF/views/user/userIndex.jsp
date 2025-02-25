@@ -37,10 +37,11 @@
 
 			    <!-- 오른쪽 끝으로 정렬할 항목들 (d-flex로 묶어 간격 조정) -->
 			    <li class="nav-item ms-auto d-flex gap-2">
+			        <a class="nav-link" href="/cart/list">장바구니</a>
+			        
 			        <sec:authorize access="isAuthenticated()">
+			            <a class="nav-link" href="/member/mypage">내정보</a>
 			            <a class="nav-link" href="/member/logout">로그아웃</a>
-			            <a class="nav-link" href="/member/mypage">마이페이지</a>
-			            <a class="nav-link" href="/purchase/list">구매내역</a>
 			        </sec:authorize>
 			
 			        <sec:authorize access="isAnonymous()">
@@ -48,7 +49,6 @@
 			            <a class="nav-link" href="/member/login">로그인</a>
 			        </sec:authorize>
 			
-			        <a class="nav-link" href="#">장바구니</a>
 			    </li>
 			</ul>
 
@@ -59,10 +59,10 @@
                     <a class="nav-link" href="/">메인</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/board/list">게시판</a>
+                    <a class="nav-link" href="/board/listPaging">공지사항</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">상품</a>
+                    <a class="nav-link" href="/product/listPaging">상품</a>
                 </li>
                 <!-- 관리자 페이지 (권한 체크) -->
                 <sec:authorize access="hasRole('ROLE_ADMIN')">

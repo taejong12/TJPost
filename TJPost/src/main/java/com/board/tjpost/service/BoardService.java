@@ -8,8 +8,8 @@ import java.util.Map;
 
 public interface BoardService {
 
-	// 모든 공지사항 가져오기
-	public List<BoardDTO> selectBoardAll();
+	// 공지사항 목록 조회
+	public List<BoardDTO> selectBoardListAll();
 
 	// 공지사항 작성하기
 	public void insertBoard(BoardDTO boardDTO) throws IllegalStateException, IOException;

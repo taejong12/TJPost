@@ -29,8 +29,8 @@ public class ProductServiceImpl implements ProductService {
 	FileDAO fileDAO;
 
 	// 모든 상품 조회
-	public List<ProductDTO> selectProductAll() {
-		return productDAO.selectProductAll();
+	public List<ProductDTO> selectProductListAll() {
+		return productDAO.selectProductListAll();
 	}
 
 	// 상품 등록

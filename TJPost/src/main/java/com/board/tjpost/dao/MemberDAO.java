@@ -33,4 +33,10 @@ public interface MemberDAO {
 
 	// 회원 정보
 	public MemberDTO selectMemberById(String memberId);
+
+	// 회원정보수정
+	public void updateMember(MemberDTO memberDTO);
+
+	// 회원삭제
+	public void deleteMember(String memberId);
 }

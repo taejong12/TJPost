@@ -118,7 +118,7 @@
 					<!-- 맨 마지막 페이지 이동 버튼 -->
 		            <c:if test="${currentPage < totalPage}">
 		                <li class="page-item">
-		                    <a class="page-link" href="/admin/board/listPaging?page=${totalPage}&limit=${limit}">&raquo;&raquo;&raquo;</a>
+		                    <a class="page-link" href="/admin/board/listPaging?page=${totalPage}&limit=${limit}&sort=${sort}">&raquo;&raquo;&raquo;</a>
 		                </li>
 		            </c:if>
 				</ul>

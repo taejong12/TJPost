@@ -30,8 +30,8 @@ public class BoardServiceImpl implements BoardService {
 	private FileDAO fileDAO;
 	
 	// 모든 공지사항 조회
-	public List<BoardDTO> selectBoardAll() {
-		return boardDAO.selectBoardAll();
+	public List<BoardDTO> selectBoardListAll() {
+		return boardDAO.selectBoardListAll();
 	}
 
 	// 공지사항 작성

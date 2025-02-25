@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.tjpost.dao.AddressDAO">
+
+	<insert id="insertAddress" parameterType="AddressDTO">
+		INSERT INTO ADDRESS(
+			ADDRESS_NAME,
+			ADDRESS_ROADADDRESS,
+			ADDRESS_DETAILADDRESS,
+			ADDRESS_POSTCODE,
+			ADDRESS_PHONENUMBER,
+			ADDRESS_DEFAULTADDRESS,
+			MEMBER_ID
+		) VALUES (
+			#{addressName},
+			#{addressRoadAddress},
+			#{addressDetailAddress},
+			#{addressPostCode},
+			#{addressPhoneNumber},
+			#{addressDefaultAddress},
+			#{memberId}
+		)
+	</insert>
+	
+	 <select id="selectAddressTotalCountByMemberId" resultType="Integer">
+		SELECT COUNT(*)
+		FROM ADDRESS
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="selectAddressListByMemberId" parameterType="map" resultType="AddressDTO">
+		SELECT *
+		FROM (
+			SELECT A.*, ROWNUM AS rnum
+			FROM (
+				SELECT *
+				FROM ADDRESS
+				WHERE MEMBER_ID = #{memberId}
+				ORDER BY ADDRESS_ID DESC
+			) A
+			<![CDATA[
+			WHERE ROWNUM <= #{endRow}
+		)
+		WHERE rnum >= #{startRow}
+			]]>
+	</select>
+	
+	<update id="updateAddressDefaultAddress" parameterType="String">
+		UPDATE ADDRESS 
+		SET ADDRESS_DEFAULTADDRESS = 'N'
+		WHERE MEMBER_ID = #{memberId}
+	</update>
+	
+	<select id="selectAddressByAddressId" parameterType="Integer" resultType="AddressDTO">
+		SELECT *
+		FROM ADDRESS
+		WHERE ADDRESS_ID = #{addressId}
+	</select>
+	
+	<update id="updateAddressByAddressId" parameterType="AddressDTO">
+		UPDATE ADDRESS 
+		SET 
+			ADDRESS_NAME = #{addressName},
+			ADDRESS_POSTCODE = #{addressPostCode},
+			ADDRESS_ROADADDRESS = #{addressRoadAddress},
+			ADDRESS_DETAILADDRESS = #{addressDetailAddress},
+			ADDRESS_PHONENUMBER = #{addressPhoneNumber},
+			ADDRESS_DEFAULTADDRESS = #{addressDefaultAddress},
+			ADDRESS_UPDATE = SYSDATE
+		WHERE 
+			ADDRESS_ID = #{addressId}
+	</update>
+	
+	<delete id="deleteAddressByAddressId" parameterType="Integer">
+		DELETE FROM ADDRESS
+		WHERE ADDRESS_ID = #{addressId}
+	</delete>
+</mapper>

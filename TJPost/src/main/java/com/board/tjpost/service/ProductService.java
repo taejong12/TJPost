@@ -9,7 +9,7 @@ import com.board.tjpost.dto.ProductDTO;
 public interface ProductService {
 
 	// 모든 상품 조회
-	public List<ProductDTO> selectProductAll();
+	public List<ProductDTO> selectProductListAll();
 
 	// 상품 목록 페이징 처리
 	public List<ProductDTO> selectProductListAllPaging(Map<String, Object> paramMap);

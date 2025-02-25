@@ -7,6 +7,7 @@
 <title>장바구니</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
 	장바구니 목록
 </body>
 </html>

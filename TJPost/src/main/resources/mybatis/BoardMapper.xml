@@ -4,7 +4,7 @@
 
 <mapper namespace="com.board.tjpost.dao.BoardDAO">
 
-    <select id="selectBoardAll" resultType="BoardDTO">
+    <select id="selectBoardListAll" resultType="BoardDTO">
         SELECT * 
         FROM BOARD
         ORDER BY BOARD_ID DESC

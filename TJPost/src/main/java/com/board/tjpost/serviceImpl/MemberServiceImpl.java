@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -89,5 +91,23 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	// 회원 정보
 	public MemberDTO selectMemberById(String memberId) {
 		return memberDAO.selectMemberById(memberId);
+	}
+
+	// 내 정보
+	public MemberDTO selectMemberInfo() {
+		// 현재 로그인한 사용자 가져오기
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+	    return memberDAO.selectMemberById(userDetails.getUsername()); 
+	}
+
+	// 회원정보수정
+	public void updateMember(MemberDTO memberDTO) {
+		memberDAO.updateMember(memberDTO);
+	}
+
+	// 회원탈퇴
+	public void deleteMember(String memberId) {
+		memberDAO.deleteMember(memberId);
 	}
 }

@@ -30,5 +30,14 @@ public interface MemberService {
 	// 회원 정보
 	MemberDTO selectMemberById(String memberId);
 
+	// 내정보
+	MemberDTO selectMemberInfo();
+
+	// 회원정보수정
+	void updateMember(MemberDTO memberDTO);
+
+	// 회원탈퇴
+	void deleteMember(String memberId);
+
 
 }

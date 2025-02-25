@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매내역 목록</title>
+<title>구매내역 목록페이지</title>
 </head>
 <body>
-	구매내역 목록
+	<%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
+	
+	<div class="container mt-5 mb-5">
+		<div class="row">
+		<%@ include file="/WEB-INF/views/user/member/memberSidebar.jsp"%>
+		</div>
+	</div>
 </body>
 </html>

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/purchase")
-public class PurchaseController {
+@RequestMapping("/cart")
+public class CartController {
 
-	@GetMapping("/listPaging")
-	public String selectPurchaseList() {
-		return "user/purchase/purchaseList";
+	@GetMapping("/list")
+	public String selectCartListByMemberId() {
+		return "user/cart/cartList";
 	}
 }

@@ -64,8 +64,11 @@ public class SecurityConfig {
 						.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
 						// 페이지 접근 경로
 						.requestMatchers( new AntPathRequestMatcher("/")
-									,new AntPathRequestMatcher("/member/**")
-									,new AntPathRequestMatcher("/board/list")
+									,new AntPathRequestMatcher("/member/join")
+									,new AntPathRequestMatcher("/member/memberIdCheck")
+									,new AntPathRequestMatcher("/member/login")
+									,new AntPathRequestMatcher("/board/**")
+									,new AntPathRequestMatcher("/product/listPaging")
 									,new AntPathRequestMatcher("/img/**")
 									,new AntPathRequestMatcher("/css/**")
 									,new AntPathRequestMatcher("/js/**")
