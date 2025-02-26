@@ -9,54 +9,85 @@
 <body>
 	<%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
 	
-	<div class="container mt-5 mb-5">
-		<h2 class="text-center mb-4">📌 상품 상세 정보</h2>
-		<div class="card shadow p-4">
-			<div class="row">
-				<!-- 상품 이미지 -->
-				<div class="col-md-6 text-center">
-					<h4 class="mb-3">상품 이미지</h4>
-					<c:choose>
-						<c:when test="${empty fileList}">
-							<p class="text-muted">등록된 이미지가 없습니다.</p>
-						</c:when>
-						<c:otherwise>
-							<div class="d-flex flex-wrap justify-content-center">
-								<c:forEach var="file" items="${fileList}">
-									<c:if test="${file.productId == productDTO.productId}">
-										<div class="m-2">
-											<img src="/img/product/${file.fileName}" class="product-img">
-										</div>
-									</c:if>
-								</c:forEach>
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</div>
+	<div class="container mt-5">
+        <div class="row">
+            <!-- 상품 이미지 (왼쪽) -->
+            <div class="col-md-8 text-center border-end d-flex flex-column align-items-center">
+				<h4 class="mb-3">상품 이미지</h4>
+                <c:choose>
+                    <c:when test="${empty fileList}">
+                        <p class="text-muted">등록된 이미지가 없습니다.</p>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="d-flex flex-column">
+                            <c:forEach var="file" items="${fileList}">
+                                <c:if test="${file.productId == productDTO.productId}">
+                                    <img src="/img/product/${file.fileName}" class="img-fluid mb-2 w-75">
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
 
-				<!-- 상품 정보 -->
-				<div class="col-md-6">
-					<h4 class="mb-3">상품 정보</h4>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><strong>📌 상품명:</strong> ${productDTO.productName}</li>
-						<li class="list-group-item"><strong>💰 가격:</strong> ${productDTO.productPrice} 원</li>
-						<li class="list-group-item"><strong>📝 설명:</strong> ${productDTO.productContent}</li>
-						<li class="list-group-item"><strong>📦 재고:</strong> ${productDTO.productStock} 개</li>
-						<li class="list-group-item"><strong>🔖 카테고리:</strong> ${productDTO.productCategory}</li>
-						<li class="list-group-item"><a href="/product/pay/${productDTO.productId}" class="btn btn-success">결제하기</a></li>
-						<li class="list-group-item"><a href="/product/cart/${productDTO.productId}" class="btn btn-info">장바구니</a></li>
-						<li class="list-group-item"><strong>🔖 상품후기</strong></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+            <!-- 상품 정보 (오른쪽 카드) -->
+            <div class="col-md-4 d-flex justify-content-end">
+                <div class="card p-4 shadow w-100">
+                    <h4 class="mb-3">상품 정보</h4>
+                    <form action="/product/pay" method="get">
+                        <input type="hidden" name="productId" value="${productDTO.productId}">
+                        <input type="hidden" name="productName" value="${productDTO.productName}">
+                        <input type="hidden" name="productPrice" value="${productDTO.productPrice}">
+                        <input type="hidden" name="productContent" value="${productDTO.productContent}">
+                        <input type="hidden" name="productStock" value="${productDTO.productStock}">
+                        <input type="hidden" name="productCategory" value="${productDTO.productCategory}">
 
-		<!-- 버튼 -->
-		<div class="text-center mt-4">
-			<div class="d-flex justify-content-center gap-2">
-				<a href="/product/listPaging" class="btn btn-primary">상품 목록</a>
-			</div>
-		</div>
-	</div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>📌 상품명:</strong> ${productDTO.productName}</li>
+                            <li class="list-group-item"><strong>💰 가격:</strong> ${productDTO.productPrice} 원</li>
+                            <li class="list-group-item"><strong>📦 재고:</strong> ${productDTO.productStock} 개</li>
+                            <li class="list-group-item"><strong>🔖 카테고리:</strong> ${productDTO.productCategory}</li>
+                            <li class="list-group-item">
+                                <strong>🔖 총수량:</strong>
+                                <input type="number" id="totalCount" name="productPayTotalCount" value="1" min="1" max="${productDTO.productStock}" class="form-control w-50 d-inline">
+                            </li>
+                            <li class="list-group-item"><strong>🔖 총결제금액:</strong> <span id="totalPayment">${productDTO.productPrice}</span> 원</li>
+                            <li class="list-group-item">
+                                <button type="submit" class="btn btn-success">결제</button>
+                                <a href="/product/cart/${productDTO.productId}" class="btn btn-info">장바구니</a>
+							</li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 후기 및 추가 정보 -->
+        <div class="d-flex justify-content-center mt-4 mb-5 border">
+            <button id="toggleDetails" class="btn btn-light w-100">더보기 ▼</button>
+        </div>
+        <div id="extraDetails" class="mt-3 mb-5 d-none">
+            <div class="card p-3 text-center">
+                <h5>상품 설명</h5>
+                <p>${productDTO.productContent}</p>
+                <h5>상품 후기</h5>
+                <p>상품 후기는 여기에 표시됩니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#totalCount').on('input', function() {
+                let count = $(this).val();
+                let price = ${productDTO.productPrice};
+                $('#totalPayment').text(price * count);
+            });
+
+            $('#toggleDetails').click(function() {
+                $('#extraDetails').toggleClass('d-none');
+            });
+        });
+    </script>
 </body>
 </html>

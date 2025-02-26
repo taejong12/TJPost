@@ -15,19 +15,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.board.tjpost.dao.FileDAO;
 import com.board.tjpost.dao.ProductDAO;
+import com.board.tjpost.dto.AddressDTO;
 import com.board.tjpost.dto.FileDTO;
+import com.board.tjpost.dto.OrdersDTO;
 import com.board.tjpost.dto.ProductDTO;
+import com.board.tjpost.service.DeliveryService;
+import com.board.tjpost.service.OrdersService;
 import com.board.tjpost.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	ProductDAO productDAO;
+	private ProductDAO productDAO;
 
 	@Autowired
-	FileDAO fileDAO;
-
+	private FileDAO fileDAO;
+	
 	// 모든 상품 조회
 	public List<ProductDTO> selectProductListAll() {
 		return productDAO.selectProductListAll();
@@ -172,6 +176,11 @@ public class ProductServiceImpl implements ProductService {
 	// 회원 검색
 	public List<ProductDTO> searchProductList(String searchKeyword) {
 		return productDAO.searchProductList(searchKeyword);
+	}
+
+	// 결제 시 재고 업데이트
+	public void updateProductOrdersComplete(OrdersDTO ordersDTO) {
+		
 	}
 
 }

@@ -3,7 +3,9 @@ package com.board.tjpost.service;
 import java.util.List;
 import java.util.Map;
 
+import com.board.tjpost.dto.AddressDTO;
 import com.board.tjpost.dto.MemberDTO;
+import com.board.tjpost.dto.OrdersDTO;
 import com.board.tjpost.dto.ProductDTO;
 
 public interface ProductService {
@@ -31,5 +33,8 @@ public interface ProductService {
 
 	// 상품 검색
 	public List<ProductDTO> searchProductList(String searchKeyword);
+
+	// 상품 결제 완료시 재고 업데이트
+	public void updateProductOrdersComplete(OrdersDTO ordersDTO);
 
 }

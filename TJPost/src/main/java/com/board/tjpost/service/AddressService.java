@@ -25,4 +25,7 @@ public interface AddressService {
 	// 주소 아이디로 삭제
 	void deleteAddressByAddressId(Integer addressId);
 
+	// 기본 배송지 조회
+	AddressDTO selectAddressByDefaultAddress();
+
 }

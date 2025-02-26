@@ -73,5 +73,12 @@ public class AddressServiceImpl implements AddressService{
 		addressDAO.deleteAddressByAddressId(addressId);
 	}
 
+	// 기본 배송지 조회
+	public AddressDTO selectAddressByDefaultAddress() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		return addressDAO.selectAddressByDefaultAddress(userDetails.getUsername());
+	}
+
 	
 }

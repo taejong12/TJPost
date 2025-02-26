@@ -22,4 +22,9 @@ public class ProductDTO {
 	private Date productUpdate; // 상품_수정일(기본값: 현재날짜)
 	private String memberId; // 상품_등록아이디
 	private MultipartFile[] productFiles; // 상품_파일
+	
+	// 결제관련
+	private int productPayTotalCount; // 총 결제갯수
+	private int productTotalPayment; // 총 결제금액
+	private String productPaymentMethod; // 결제수단
 }

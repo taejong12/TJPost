@@ -31,5 +31,8 @@ public interface AddressDAO {
 	// 배송지 삭제
 	void deleteAddressByAddressId(Integer addressId);
 
+	// 기본 배송지 조회
+	AddressDTO selectAddressByDefaultAddress(String username);
+
 	
 }

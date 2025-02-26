@@ -10,13 +10,13 @@ import lombok.ToString;
 @Setter
 @ToString
 public class FileDTO {
-	private Integer fileId;
-    private String fileName;
-    private String fileOriginalName;
-    private String filePath;
-    private Date fileCreate;
-    private Date fileUpdate;
-    private String memberId;
-    private Integer boardId;
-    private Integer productId;
+	private Integer fileId; // 파일번호
+    private String fileName; // 파일이름
+    private String fileOriginalName; // 파일오리지널이름
+    private String filePath; // 파일경로
+    private Date fileCreate; // 파일 생성일
+    private Date fileUpdate; // 파일 수정일
+    private String memberId; // 회원아이디
+    private Integer boardId; // 공지사항번호
+    private Integer productId; // 상품번호
 }

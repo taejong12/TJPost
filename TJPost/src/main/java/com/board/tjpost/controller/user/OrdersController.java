@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/purchase")
-public class PurchaseController {
+@RequestMapping("/orders")
+public class OrdersController {
 
 	@GetMapping("/listPaging")
-	public String selectPurchaseList() {
-		return "user/purchase/purchaseList";
+	public String selectOrdersListPaging() {
+		return "user/orders/ordersList";
 	}
 }

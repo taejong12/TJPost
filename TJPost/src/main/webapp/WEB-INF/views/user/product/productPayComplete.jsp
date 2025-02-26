@@ -4,15 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매내역 목록페이지</title>
+<title>상품 결제완료 페이지</title>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/user/userIndex.jsp"%>
+	결제완료
+	주문번호
+	결제금액
 	
-	<div class="container mt-5 mb-5">
-		<div class="row">
-		<%@ include file="/WEB-INF/views/user/member/memberSidebar.jsp"%>
-		</div>
-	</div>
+	
+	주문내역 보러가기
+	
+	
 </body>
 </html>

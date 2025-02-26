@@ -77,4 +77,11 @@
 		DELETE FROM ADDRESS
 		WHERE ADDRESS_ID = #{addressId}
 	</delete>
+	
+	<select id="selectAddressByDefaultAddress" parameterType="String" resultType="AddressDTO">
+		SELECT *
+		FROM ADDRESS
+		WHERE MEMBER_ID = #{memberId}
+		AND ADDRESS_DEFAULTADDRESS = 'Y'
+	</select>
 </mapper>

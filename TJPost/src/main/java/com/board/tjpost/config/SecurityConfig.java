@@ -69,6 +69,7 @@ public class SecurityConfig {
 									,new AntPathRequestMatcher("/member/login")
 									,new AntPathRequestMatcher("/board/**")
 									,new AntPathRequestMatcher("/product/listPaging")
+									,new AntPathRequestMatcher("/product/detail/**")
 									,new AntPathRequestMatcher("/img/**")
 									,new AntPathRequestMatcher("/css/**")
 									,new AntPathRequestMatcher("/js/**")
