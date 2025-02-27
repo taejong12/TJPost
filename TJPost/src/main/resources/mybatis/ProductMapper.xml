@@ -37,9 +37,9 @@
 					SELECT *
 					FROM PRODUCT
 					<choose>
-		            	<!--  <when test="sort == 'sales'">
-		                    ORDER BY SALES_COUNT DESC
-		                </when> -->
+		            	<when test="sort == 'sales'">
+		                    ORDER BY PRODUCT_TOTALSALESCOUNT DESC
+		                </when>
 		                <when test="sort == 'highPrice'">
 		                	ORDER BY PRODUCT_PRICE DESC
 		                </when>
@@ -95,4 +95,14 @@
 	    DELETE FROM PRODUCT
 	    WHERE PRODUCT_ID = #{productId}
 	</delete>
+	
+	<update id="updateProductOrdersComplete" parameterType="ProductDTO">
+		UPDATE PRODUCT
+	    SET 
+	        PRODUCT_STOCK = #{productStock},
+	        PRODUCT_TOTALSALESCOUNT = #{productTotalSalesCount},
+	        PRODUCT_UPDATE = SYSDATE
+	    WHERE 
+	        PRODUCT_ID = #{productId}
+	</update>
 </mapper>

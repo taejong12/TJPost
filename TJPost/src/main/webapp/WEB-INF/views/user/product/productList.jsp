@@ -49,11 +49,13 @@
 								<div class="card h-100 shadow-sm">
 									<div class="carousel slide" data-bs-ride="carousel">
 	                                    <div class="carousel-inner">
-	                                        <c:forEach var="productFile" items="${productFileList}" varStatus="statusFile">
+	                                    	<c:set var="isFirst" value="true"/>
+	                                        <c:forEach var="productFile" items="${productFileList}">
 	                                            <c:if test="${productFile.productId == product.productId}">
-	                                                <div class="carousel-item ${statusFile.first ? 'active' : ''}">
+	                                                <div class="carousel-item ${isFirst ? 'active' : ''}">
 	                                                    <img src="/img/product/${productFile.fileName}" alt="상품 이미지" class="card-img-top d-block w-100" style="height: 200px;">
 	                                                </div>
+	                                                <c:set var="isFirst" value="false"/>
 	                                            </c:if>
 	                                        </c:forEach>
 	                                    </div>

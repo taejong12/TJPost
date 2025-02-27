@@ -11,7 +11,6 @@
 	
 	<div class="container mt-5">
         <form action="/product/pay" method="post">
-        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             <!-- 결제 상품 정보 -->
             <div class="card p-4 mb-3">
                 <h4 class="mb-3">결제 상품 정보</h4>
@@ -96,10 +95,9 @@
             <!-- 결제 수단 선택 -->
             <div class="card p-4 mb-3">
                 <h4 class="mb-3">결제 수단 선택</h4>
-                <select class="form-select" name="ordersPaymentMethod" required>
-                    <option value="card">신용카드</option>
-                    <option value="bank">계좌이체</option>
-                    <option value="kakao">카카오페이</option>
+                <select class="form-select" id="ordersPaymentMethod" name="ordersPaymentMethod" required>
+                    <option value="신용카드">신용카드</option>
+                    <option value="계좌이체">계좌이체</option>
                 </select>
             </div>
 
@@ -107,10 +105,6 @@
             <div class="text-center mb-5">
                 <button type="submit" class="btn btn-outline-success btn-lg w-50">결제하기</button>
             </div>
-            
-            <input type="hidden" name="ordersTotalCount">
-            <input type="hidden" name="ordersTotalPrice">
-            <input type="hidden" name="ordersDetailList">
         </form>
     </div>
 
@@ -132,12 +126,12 @@
 	                let price = parseInt(row.querySelector("#productPrice").innerText.replace("원", "").trim());
 	                let countRow = row.querySelector("#count");
 	                let totalPriceRow = row.querySelector("#totalPrice");
-	                let stock = parseInt(row.querySelector("#productStock").value);
+	                let productStock = parseInt(row.querySelector("#productStock").value);
 	                let productId = parseInt(row.querySelector("#productId").value);
-	                
+	              
 	             	// 재고보다 많으면 재고 수량으로 변경
-	                if(parseInt(countRow.value)>stock){
-	                	countRow.value = stock;
+	                if(parseInt(countRow.value)>productStock){
+	                	countRow.value = productStock;
 	                }
 	                
 	                let count = parseInt(countRow.value);
@@ -162,7 +156,8 @@
 	                	ordersDetailProductPrice: price,
 	                	ordersDetailProductCount: count,
 	                	ordersDetailProductPayPrice: totalPrice,
-	                	productId: productId
+	                	productId: productId,
+	                	productStock: productStock
 	                });
 	             	
 	            });
@@ -200,19 +195,59 @@
 	     	
 	     	// **폼 제출 시 선택된 데이터 hidden input에 담기**
 	        document.querySelector("form").addEventListener("submit", function (event) {
+	        	
+	        	// 폼 제출 막기
+	        	event.preventDefault();
+	        	
 	            let { finalTotalPrice, finalTotalCount, selectedProducts } = updateTotal();
 	            
 	            // 선택된 상품이 없으면 결제 진행 X
 	            if (selectedProducts.length === 0) {
 	                alert("선택된 상품이 없습니다!");
-	                event.preventDefault(); // 폼 제출 막기
 	                return;
 	            }
+	            
+	            // RequestBody는 1개만 작성가능
+	            // 그래서 orders 안에 데이터 다 때려박음
+	         	// 객체로 데이터 구성
+	            let requestData = {
+	                ordersTotalCount: finalTotalCount,
+	                ordersTotalPrice: finalTotalPrice,
+	                ordersDetailList: selectedProducts,
+	                ordersPaymentMethod: document.getElementById("ordersPaymentMethod").value,
+	                addressDTO: {
+	                    addressId: document.getElementById("addressId").value,
+	                    addressName: document.getElementById("addressName").value,
+	                    addressRoadAddress: document.getElementById("addressRoadAddress").value,
+	                    addressDetailAddress: document.getElementById("addressDetailAddress").value,
+	                    addressPostCode: document.getElementById("addressPostCode").value,
+	                    addressPhoneNumber: document.getElementById("addressPhoneNumber").value
+	                }
+	            };
 
-	            // hidden input에 데이터 삽입
-	            document.querySelector("input[name='ordersTotalCount']").value = finalTotalCount;
-	            document.querySelector("input[name='ordersTotalPrice']").value = finalTotalPrice;
-	            document.querySelector("input[name='ordersDetailList']").value = JSON.stringify(selectedProducts);
+				let csrf = document.querySelector('meta[name="_csrf"]').content;
+				let csrf_header = document.querySelector('meta[name="_csrf_header"]').content;
+				
+	            // 비동기 요청 - form으로 List<OrdersDetailDTO> ordersDetailList 보낼경우 modelattribue가 처리를 못함
+	            // 그래서 formdata에 별도로 추가해서 fetch로 전송
+	            // headers 객체에서 변수를 키 값으로 사용할 경우 대괄호([])를 사용해야 해.
+	            fetch("/product/pay",{
+	            	method: "POST",
+	            	headers: { "Content-Type": "application/json",
+	            		[csrf_header]: csrf
+	            	},
+	            	body: JSON.stringify(requestData)
+	            })
+	            .then(response => response.json())
+	            .then(data => 
+		            // 서버에서 받은 redirect URL로 이동
+		            {window.location.href = data.redirectUrl}
+	            )
+	            .catch(error => {
+	                console.error("에러 발생:", error);
+	                alert("결제 처리 중 오류가 발생했습니다.");
+	            });
+	            
 	        });
 	     	
 	    });

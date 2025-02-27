@@ -21,4 +21,5 @@ public class OrdersDTO {
 	private Date ordersUpdate; // 주문수정
 	private String memberId; // 회원아이디
 	private List<OrdersDetailDTO> ordersDetailList; // 여러개의 상품 구매시
+	private AddressDTO addressDTO;
 }

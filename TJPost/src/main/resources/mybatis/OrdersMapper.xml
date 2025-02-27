@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.tjpost.dao.OrdersDAO">
+
+	<insert id="insertOrders" parameterType="OrdersDTO" useGeneratedKeys="true" keyProperty="ordersId" keyColumn="ORDERS_ID">
+		INSERT INTO ORDERS(
+			ORDERS_TOTALCOUNT,
+			ORDERS_TOTALPRICE,
+			ORDERS_PAYMENTMETHOD,
+			MEMBER_ID
+		) VALUES (
+			#{ordersTotalCount},
+			#{ordersTotalPrice},
+			#{ordersPaymentMethod},
+			#{memberId}			
+		)
+	</insert>
+	
+	<insert id="insertOrdersDetail" parameterType="OrdersDetailDTO" useGeneratedKeys="true" keyProperty="ordersDetailId" keyColumn="ORDERS_DETAIL_ID">
+		INSERT INTO ORDERS_DETAIL(
+			ORDERS_DETAIL_PRODUCTNAME,
+			ORDERS_DETAIL_PRODUCTPRICE,
+			ORDERS_DETAIL_PRODUCTCOUNT,
+			ORDERS_DETAIL_PRODUCTPAYPRICE,
+			ORDERS_ID,
+			PRODUCT_ID
+		) VALUES (
+			#{ordersDetailProductName},
+			#{ordersDetailProductPrice},
+			#{ordersDetailProductCount},
+			#{ordersDetailProductPayPrice},
+			#{ordersId},
+			#{productId}
+		)
+	</insert>
+
+	<select id="selectOrdersList" parameterType="map" resultType="OrdersDTO">
+		SELECT *
+		FROM(
+			SELECT A.*, ROWNUM AS rnum
+			FROM(
+				SELECT * 
+				FROM ORDERS
+				WHERE MEMBER_ID = #{memberId}
+				ORDER BY ORDERS_CREATE DESC
+			) A
+			<![CDATA[
+			WHERE ROWNUM <= #{endRow}
+		)
+		WHERE rnum >= #{startRow}
+			]]>
+	</select>
+	
+	<select id="selectOrdersTotalCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM ORDERS
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="selectOrdersDetailListByOrdersId" resultType="OrdersDetailDTO">
+		SELECT *
+		FROM ORDERS_DETAIL
+		WHERE ORDERS_ID = #{ordersId}
+	</select>
+</mapper>

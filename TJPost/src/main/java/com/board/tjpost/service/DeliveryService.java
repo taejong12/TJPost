@@ -13,6 +13,6 @@ public interface DeliveryService {
 	List<DeliveryDTO> selectDeliveryListByMemberId();
 
 	// 결제 완료 배송 저장
-	void insertDeliveryOrdersComplete(OrdersDTO ordersDTO, AddressDTO addressDTO);
+	void insertDeliveryOrdersComplete(OrdersDTO ordersDTO);
 
 }

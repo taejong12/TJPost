@@ -18,6 +18,7 @@ import com.board.tjpost.dao.ProductDAO;
 import com.board.tjpost.dto.AddressDTO;
 import com.board.tjpost.dto.FileDTO;
 import com.board.tjpost.dto.OrdersDTO;
+import com.board.tjpost.dto.OrdersDetailDTO;
 import com.board.tjpost.dto.ProductDTO;
 import com.board.tjpost.service.DeliveryService;
 import com.board.tjpost.service.OrdersService;
@@ -181,6 +182,17 @@ public class ProductServiceImpl implements ProductService {
 	// 결제 시 재고 업데이트
 	public void updateProductOrdersComplete(OrdersDTO ordersDTO) {
 		
+		for(OrdersDetailDTO ordersDetailDTO : ordersDTO.getOrdersDetailList()) {
+			
+			ProductDTO productDTO = productDAO.selectProductById(ordersDetailDTO.getProductId());
+			
+			int salesCount = productDTO.getProductTotalSalesCount() + ordersDetailDTO.getOrdersDetailProductCount();
+			productDTO.setProductTotalSalesCount(salesCount);
+			int productStock = productDTO.getProductStock() - ordersDetailDTO.getOrdersDetailProductCount();
+			productDTO.setProductStock(productStock);
+
+			productDAO.updateProductOrdersComplete(productDTO);
+		}
 	}
 
 }

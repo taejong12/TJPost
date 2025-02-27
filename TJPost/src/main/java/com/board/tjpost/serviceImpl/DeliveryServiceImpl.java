@@ -9,6 +9,7 @@ import com.board.tjpost.dao.DeliveryDAO;
 import com.board.tjpost.dto.AddressDTO;
 import com.board.tjpost.dto.DeliveryDTO;
 import com.board.tjpost.dto.OrdersDTO;
+import com.board.tjpost.dto.OrdersDetailDTO;
 import com.board.tjpost.dto.ProductDTO;
 import com.board.tjpost.service.DeliveryService;
 
@@ -25,9 +26,20 @@ public class DeliveryServiceImpl implements DeliveryService {
 	}
 
 	// 배송 저장
-	public void insertDeliveryOrdersComplete(OrdersDTO ordersDTO, AddressDTO addressDTO) {
-		// TODO Auto-generated method stub
+	public void insertDeliveryOrdersComplete(OrdersDTO ordersDTO) {
 		
+		for(OrdersDetailDTO ordersDetailDTO:ordersDTO.getOrdersDetailList()) {
+			
+			DeliveryDTO deliveryDTO = new DeliveryDTO();
+			deliveryDTO.setDeliveryAddressName(ordersDTO.getAddressDTO().getAddressName());
+			deliveryDTO.setDeliveryRoadAddress(ordersDTO.getAddressDTO().getAddressRoadAddress());
+			deliveryDTO.setDeliveryDetailAddress(ordersDTO.getAddressDTO().getAddressDetailAddress());
+			deliveryDTO.setDeliveryPostCode(ordersDTO.getAddressDTO().getAddressPostCode());
+			deliveryDTO.setDeliveryPhoneNumber(ordersDTO.getAddressDTO().getAddressPhoneNumber());
+			deliveryDTO.setOrdersId(ordersDTO.getOrdersId());
+			deliveryDTO.setOrdersDetailId(ordersDetailDTO.getOrdersDetailId());
+			
+			deliveryDAO.insertDeliveryOrdersComplete(deliveryDTO);
+		}
 	}
-	
 }

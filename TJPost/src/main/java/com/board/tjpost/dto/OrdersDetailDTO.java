@@ -19,6 +19,10 @@ public class OrdersDetailDTO {
 	private String ordersDetailStatus; // 주문상세상태(배송준비, 배송중, 배송완료, 교환, 환불)
 	private Date ordersDetailCreate; // 주문상세생성일
 	private Date ordersDetailUpdate; // 주문상세수정일
+	private Integer ordersId; // 주문번호
 	private Integer productId; // 상품번호
 	private Integer deliveryId; // 배달번호
+	
+	// 상품 재고 업데이트
+	private int productStock;
 }

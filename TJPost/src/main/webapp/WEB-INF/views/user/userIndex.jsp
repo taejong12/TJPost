@@ -4,11 +4,13 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="_csrf" content="${_csrf.token}"/> <!-- CSRF 토큰 -->
+<meta name="_csrf_header" content="${_csrf.headerName}"/> <!-- CSRF 헤더 이름 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -52,8 +54,6 @@
 			    </li>
 			</ul>
 
-
-            <!-- 하단 메뉴바 -->
             <ul class="nav nav-underline bg-light py-2">
                 <li class="nav-item">
                     <a class="nav-link" href="/">메인</a>
@@ -63,6 +63,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/product/listPaging">상품</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Q&A</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">이벤트</a>
                 </li>
                 <!-- 관리자 페이지 (권한 체크) -->
                 <sec:authorize access="hasRole('ROLE_ADMIN')">

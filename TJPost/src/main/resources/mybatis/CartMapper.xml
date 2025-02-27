@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.tjpost.dao.CartDAO">
+
+	<select id="selectCartListByMemberId" parameterType="String" resultType="CartDTO">
+		SELECT *
+		FROM CART
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="insertCart" parameterType="CartDTO">
+		INSERT INTO CART(
+			CART_PRODUCTNAME,
+			CART_PRODUCTPRICE,
+			CART_COUNT,
+			CART_TOTALPRICE,
+			MEMBER_ID,
+			PRODUCT_ID
+		) VALUES (
+			#{cartProductName},
+			#{cartProductPrice},
+			#{cartCount},
+			#{cartTotalPrice},
+			#{memberId},
+			#{productId}
+		)
+	</insert>
+</mapper>

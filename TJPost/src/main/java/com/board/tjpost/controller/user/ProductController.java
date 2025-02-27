@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,6 +26,8 @@ import com.board.tjpost.service.DeliveryService;
 import com.board.tjpost.service.FileService;
 import com.board.tjpost.service.OrdersService;
 import com.board.tjpost.service.ProductService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/product")
@@ -121,19 +125,38 @@ public class ProductController {
 
 	// 상품 결제하기
 	@PostMapping("/pay")
-	public String insertProductPay(@ModelAttribute OrdersDTO orderDTO, @ModelAttribute AddressDTO addressDTO, Model model) {
-		
-		//결제성공시
-		
+	public ResponseEntity<Map<String, String>>  insertProductPay(@RequestBody OrdersDTO ordersDTO, HttpSession session) {
+
 		//주문내역&상세내역 저장
-		ordersService.insertOrdersAndOrdersDetail(orderDTO);
-		
+		ordersDTO = ordersService.insertOrdersAndOrdersDetail(ordersDTO);
+
 		//배송 저장
-		deliveryService.insertDeliveryOrdersComplete(orderDTO, addressDTO);
+		deliveryService.insertDeliveryOrdersComplete(ordersDTO);
 
 		//상품 재고 업데이트
-		productService.updateProductOrdersComplete(orderDTO);
+		productService.updateProductOrdersComplete(ordersDTO);
 	
+		//세션에 orderDTO 저장
+	    session.setAttribute("ordersDTO", ordersDTO);
+		
+		//응답에 리디렉트 URL 포함하여 반환
+	    Map<String, String> response = new HashMap<>();
+	    response.put("redirectUrl", "/product/payComplete");
+
+		return ResponseEntity.ok(response);
+	}
+	
+	// 결제완료페이지
+	@GetMapping("/payComplete")
+	public String productPayCompletePage(HttpSession session, Model model) {
+		OrdersDTO ordersDTO = (OrdersDTO) session.getAttribute("ordersDTO");
+
+	    if (ordersDTO == null) {
+	        return "redirect:/"; // 세션 만료 시 홈으로 이동
+	    }
+
+	    model.addAttribute("ordersDTO", ordersDTO);
+	    session.removeAttribute("ordersDTO"); // 사용 후 세션 제거
 		return "user/product/productPayComplete";
 	}
 

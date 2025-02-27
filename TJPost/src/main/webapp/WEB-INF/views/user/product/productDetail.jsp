@@ -48,16 +48,19 @@
                             <li class="list-group-item"><strong>📦 재고:</strong> ${productDTO.productStock} 개</li>
                             <li class="list-group-item"><strong>🔖 카테고리:</strong> ${productDTO.productCategory}</li>
                             <li class="list-group-item">
-                                <strong>🔖 총수량:</strong>
+                                <strong>🛒 총수량:</strong>
                                 <input type="number" id="totalCount" name="productPayTotalCount" value="1" min="1" max="${productDTO.productStock}" class="form-control w-50 d-inline">
                             </li>
-                            <li class="list-group-item"><strong>🔖 총결제금액:</strong> <span id="totalPayment">${productDTO.productPrice}</span> 원</li>
-                            <li class="list-group-item">
-                                <button type="submit" class="btn btn-success">결제</button>
-                                <a href="/product/cart/${productDTO.productId}" class="btn btn-info">장바구니</a>
-							</li>
+                            <li class="list-group-item"><strong>💵 총결제금액:</strong> <span id="totalPayment">${productDTO.productPrice}</span> 원</li>
                         </ul>
+			             <div class="d-flex justify-content-center mt-3">
+			                <button type="submit" class="btn btn-outline-success w-75">💳 결제하기</button>
+			            </div>
                     </form>
+                    
+                    <div class="d-flex justify-content-center mt-2">
+			            <button id="insertCart" class="btn btn-info w-75">🛍️ 장바구니 담기</button>
+			        </div>
                 </div>
             </div>
         </div>
@@ -87,6 +90,40 @@
             $('#toggleDetails').click(function() {
                 $('#extraDetails').toggleClass('d-none');
             });
+            
+            $('#insertCart').on('click', function() {
+            	
+            	let csrfToken = $("meta[name='_csrf']").attr("content");
+            	let csrfHeader = $("meta[name='_csrf_header']").attr("content");
+            	
+            	let cartDTO = {
+          			cartProductName: "${productDTO.productName}",
+      				cartProductPrice: ${productDTO.productPrice},
+      				cartCount: $('#totalCount').val(),
+      				cartTotalPrice: $('#totalPayment').text(),
+      				productId: ${productDTO.productId}
+            	}
+            	
+            	$.ajax({
+            		type: "POST",
+            		url: "/cart/insert",
+            		contentType: "application/json",
+            		data: JSON.stringify(cartDTO),
+            		beforeSend: function(xhr) {
+                        xhr.setRequestHeader(csrfHeader, csrfToken); // CSRF 토큰 추가
+                    },
+            		success: function(response) {
+            			if (confirm(response)) {
+            	            window.location.href = "/cart/list";
+            	        }
+                    },
+                    error: function() {
+                        alert("장바구니 추가 중 오류가 발생했습니다.");
+                    }
+            	})
+            	
+            });
+            
         });
     </script>
 </body>

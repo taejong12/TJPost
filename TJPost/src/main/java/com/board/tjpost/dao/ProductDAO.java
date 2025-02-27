@@ -34,4 +34,7 @@ public interface ProductDAO {
 	// 상품 삭제
 	public void deleteProduct(Integer productId);
 
+	// 결제 완료 상품 재고 수정
+	public void updateProductOrdersComplete(ProductDTO productDTO);
+
 }

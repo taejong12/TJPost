@@ -3,5 +3,24 @@
 	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.board.tjpost.dao.DeliveryDAO">
-
+	<insert id="insertDeliveryOrdersComplete" parameterType="DeliveryDTO">
+		INSERT INTO DELIVERY(
+			DELIVERY_ADDRESSNAME,
+			DELIVERY_ROADADDRESS,
+			DELIVERY_DETAILADDRESS,
+			DELIVERY_POSTCODE,
+			DELIVERY_PHONENUMBER,
+			ORDERS_ID,
+			ORDERS_DETAIL_ID
+		)VALUES(
+			#{deliveryAddressName},
+			#{deliveryRoadAddress},
+			#{deliveryDetailAddress},
+			#{deliveryPostCode},
+			#{deliveryPhoneNumber},
+			#{ordersId},
+			#{ordersDetailId}
+		)
+	</insert>
+	
 </mapper>
