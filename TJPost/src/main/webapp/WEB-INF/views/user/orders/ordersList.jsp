@@ -36,16 +36,33 @@
 			            </c:when>
 			            <c:otherwise>
 			                <c:forEach var="orders" items="${ordersList}">
-			                    <a href="/orders/detail/${orders.ordersId}" class="list-group-item list-group-item-action shadow-sm rounded mb-3 p-4">
-			                        <div class="d-flex justify-content-between align-items-center">
-			                            <div>
-			                                <h5 class="fw-bold text-dark"># 주문번호: ${orders.ordersId}</h5>
-			                                <p class="mb-1 text-danger fw-bold">💰 주문금액: ₩${orders.ordersTotalPrice}</p>
-			                                <p class="mb-1 text-muted">📆 주문일: ${orders.ordersCreate}</p>
-			                            </div>
-			                            <span class="badge">${orders.ordersStatus}</span>
-			                        </div>
-			                    </a>
+		                        <div class="d-flex justify-content-between align-items-center border rounded p-4 mb-3 shadow-sm">
+								    <!-- 왼쪽 영역: 주문 정보 -->
+								    <a href="/orders/detail/${orders.ordersId}" class="flex-grow-1 text-decoration-none text-dark">
+								        <h5 class="fw-bold"># 주문번호: ${orders.ordersId}</h5>
+								        <p class="mb-1 text-danger fw-bold">💰 주문금액: ₩${orders.ordersTotalPrice}</p>
+								        <p class="mb-1 text-muted">📆 주문일: ${orders.ordersCreate}</p>
+								    </a>
+								
+								    <!-- 오른쪽 영역: 환불 버튼 -->
+								    <div class="text-end">
+									    <c:if test="${orders.ordersStatus == '결제완료'}">
+									        <button class="btn btn-danger ordersReturn fw-bold px-3 py-2" data-orders-id="${orders.ordersId}">
+									            🔄 환불신청
+									        </button>
+									    </c:if>
+									    <c:if test="${orders.ordersStatus == '환불진행중'}">
+									        <span class="badge bg-warning text-dark fw-bold px-2 py-3 fs-6 rounded">
+									            ⏳ 환불진행중
+									        </span>
+									    </c:if>
+									    <c:if test="${orders.ordersStatus == '환불완료'}">
+									        <span class="badge bg-success fw-bold px-2 py-3 fs-6 rounded">
+									            ✅ 환불완료
+									        </span>
+									    </c:if>
+									</div>
+								</div>
 			                </c:forEach>
 			            </c:otherwise>
 			        </c:choose>
@@ -109,5 +126,36 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		document.addEventListener("DOMContentLoaded", function (){
+			document.querySelectorAll(".ordersReturn").forEach(button => {
+				button.addEventListener("click", function () {
+					
+					let ordersId = this.dataset.ordersId;
+				
+					let csrf = document.querySelector('meta[name="_csrf"]').content;
+					let csrf_header = document.querySelector('meta[name="_csrf_header"]').content;
+					
+					fetch("/orders/return",{
+		            	method: "POST",
+		            	headers: { "Content-Type": "application/json",
+		            		[csrf_header]: csrf
+		            	},
+		            	body: JSON.stringify(ordersId)
+		            })
+		            .then(response => response.text())
+		            .then(text => 
+			            {alert(text), location.reload()}
+		            )
+		            .catch(error => {
+		                console.error("에러 발생:", error);
+		                alert("환불 중 오류가 발생했습니다.");
+		            });
+				});
+			});
+		});
+			
+	</script>
 </body>
 </html>

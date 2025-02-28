@@ -20,4 +20,19 @@ public interface OrdersService {
 	// 주문내역상세조회
 	List<OrdersDetailDTO> selectOrdersDetailListByOrdersId(Integer ordersId);
 
+	// 환불 신청
+	void ordersReturn(Integer ordersId);
+
+	// 관리자 주문내역 조회
+	List<OrdersDTO> selectAdminOrdersListAllPaging(Map<String, Object> paramMap);
+
+	// 관리자 주문내역 총갯수
+	int selectAdminOrdersTotalCount();
+
+	// 관리자 주문상세내역 조회
+	List<OrdersDetailDTO> selectAdminOrdersDetailByOrdersId(Integer ordersId);
+
+	// 관리자 환불승인
+	void adminOrdersReturn(Integer ordersId);
+
 }

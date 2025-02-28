@@ -64,4 +64,56 @@
 		FROM ORDERS_DETAIL
 		WHERE ORDERS_ID = #{ordersId}
 	</select>
+	
+	<update id="ordersReturn" parameterType="Integer">
+		UPDATE ORDERS
+		SET ORDERS_STATUS = '환불진행중'
+		WHERE ORDERS_ID = #{ordersId}
+	</update>
+	
+	<update id="ordersDetailReturn" parameterType="Integer">
+		UPDATE ORDERS_DETAIL
+		SET ORDERS_DETAIL_STATUS = '환불진행중'
+		WHERE ORDERS_ID = #{ordersId}
+	</update>
+	
+	<select id="selectAdminOrdersListAllPaging" parameterType="map" resultType="OrdersDTO">
+		SELECT *
+		FROM(
+			SELECT A.*, ROWNUM AS rnum
+			FROM(
+				SELECT * 
+				FROM ORDERS
+				ORDER BY ORDERS_CREATE DESC
+			) A
+			<![CDATA[
+			WHERE ROWNUM <= #{endRow}
+		)
+		WHERE rnum >= #{startRow}
+			]]>
+	</select>
+	
+	<select id="selectAdminOrdersTotalCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM ORDERS
+	</select>
+	
+	<select id="selectAdminOrdersDetailByOrdersId" resultType="OrdersDetailDTO">
+		SELECT *
+		FROM ORDERS_DETAIL
+		WHERE ORDERS_ID = #{ordersId}
+	</select>
+	
+	<update id="adminOrdersReturn" parameterType="Integer">
+		UPDATE ORDERS
+		SET ORDERS_STATUS = '환불완료'
+		WHERE ORDERS_ID = #{ordersId}
+	</update>
+	
+	<update id="adminOrdersDetailReturn" parameterType="Integer">
+		UPDATE ORDERS_DETAIL
+		SET ORDERS_DETAIL_STATUS = '환불완료'
+		WHERE ORDERS_ID = #{ordersId}
+	</update>
+	
 </mapper>

@@ -135,9 +135,6 @@
 					productPayTotalCount: count,
 					productTotalPrice: price
 				});
-  
-            	
-            	
             	let csrf = document.querySelector('meta[name="_csrf"]').content;
 				let csrf_header = document.querySelector('meta[name="_csrf_header"]').content;
 				

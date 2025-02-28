@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="_csrf" content="${_csrf.token}"/> <!-- CSRF 토큰 -->
+<meta name="_csrf_header" content="${_csrf.headerName}"/> <!-- CSRF 헤더 이름 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -37,7 +39,7 @@
                     <a class="nav-link text-white" href="/admin/Q&A/listPaging">Q&A관리</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/admin/purchase/listPaging">구매내역관리</a>
+                    <a class="nav-link text-white" href="/admin/orders/listPaging">주문내역관리</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/admin/delivery/listPaging">배송관리</a>
@@ -47,9 +49,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/admin/coupon/listPaging">쿠폰관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/admin/cancel/listPaging">취소/환불/교환 관리</a>
                 </li>
                 <li class="nav-item ms-auto d-flex gap-2">
 	                <a class="nav-link text-white" href="/member/logout">로그아웃</a>

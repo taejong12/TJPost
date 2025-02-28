@@ -25,4 +25,26 @@ public interface OrdersDAO {
 
 	// 주문내역 상세페이지 조회
 	List<OrdersDetailDTO> selectOrdersDetailListByOrdersId(Integer ordersId);
+
+	// 주문내역 환불 신청
+	void ordersReturn(Integer ordersId);
+
+	// 주문상세내역 환불 신청
+	void ordersDetailReturn(Integer ordersId);
+
+	// 관리자 주문내역 페이징
+	List<OrdersDTO> selectAdminOrdersListAllPaging(Map<String, Object> paramMap);
+
+	// 관리자 주문내역 총갯수
+	int selectAdminOrdersTotalCount();
+
+	// 관리자 주문상세내역 조회
+	List<OrdersDetailDTO> selectAdminOrdersDetailByOrdersId(Integer ordersId);
+
+	// 관리자 주문내역 환불승인
+	void adminOrdersReturn(Integer ordersId);
+
+	// 관리자 주문상세내역 환불승인
+	void adminOrdersDetailReturn(Integer ordersId);
+
 }
