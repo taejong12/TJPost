@@ -18,4 +18,7 @@ public class CartDTO {
 	private Date cartCreate;
 	private String memberId;
 	private Integer productId;
+	
+	//재고 확인
+	private int productStock;
 }

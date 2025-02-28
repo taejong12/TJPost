@@ -79,6 +79,4 @@ public class AddressServiceImpl implements AddressService{
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		return addressDAO.selectAddressByDefaultAddress(userDetails.getUsername());
 	}
-
-	
 }

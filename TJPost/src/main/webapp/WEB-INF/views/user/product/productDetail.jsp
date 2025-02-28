@@ -33,34 +33,24 @@
             <!-- 상품 정보 (오른쪽 카드) -->
             <div class="col-md-4 d-flex justify-content-end">
                 <div class="card p-4 shadow w-100">
-                    <h4 class="mb-3">상품 정보</h4>
-                    <form action="/product/pay" method="get">
-                        <input type="hidden" name="productId" value="${productDTO.productId}">
-                        <input type="hidden" name="productName" value="${productDTO.productName}">
-                        <input type="hidden" name="productPrice" value="${productDTO.productPrice}">
-                        <input type="hidden" name="productContent" value="${productDTO.productContent}">
-                        <input type="hidden" name="productStock" value="${productDTO.productStock}">
-                        <input type="hidden" name="productCategory" value="${productDTO.productCategory}">
-
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>📌 상품명:</strong> ${productDTO.productName}</li>
-                            <li class="list-group-item"><strong>💰 가격:</strong> ${productDTO.productPrice} 원</li>
-                            <li class="list-group-item"><strong>📦 재고:</strong> ${productDTO.productStock} 개</li>
-                            <li class="list-group-item"><strong>🔖 카테고리:</strong> ${productDTO.productCategory}</li>
-                            <li class="list-group-item">
-                                <strong>🛒 총수량:</strong>
-                                <input type="number" id="totalCount" name="productPayTotalCount" value="1" min="1" max="${productDTO.productStock}" class="form-control w-50 d-inline">
-                            </li>
-                            <li class="list-group-item"><strong>💵 총결제금액:</strong> <span id="totalPayment">${productDTO.productPrice}</span> 원</li>
-                        </ul>
-			             <div class="d-flex justify-content-center mt-3">
-			                <button type="submit" class="btn btn-outline-success w-75">💳 결제하기</button>
-			            </div>
-                    </form>
-                    
-                    <div class="d-flex justify-content-center mt-2">
-			            <button id="insertCart" class="btn btn-info w-75">🛍️ 장바구니 담기</button>
-			        </div>
+                    <h4 class="mb-3">상품 정보</h4>                    
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><strong>📌 상품명:</strong> ${productDTO.productName}</li>
+						<li class="list-group-item"><strong>💰 가격:</strong> ${productDTO.productPrice} 원</li>
+						<li class="list-group-item"><strong>📦 재고:</strong> ${productDTO.productStock} 개</li>
+						<li class="list-group-item"><strong>🔖 카테고리:</strong> ${productDTO.productCategory}</li>
+						<li class="list-group-item">
+							<strong>🛒 총수량:</strong>
+							<input type="number" id="totalCount" name="productPayTotalCount" value="1" min="1" max="${productDTO.productStock}" class="form-control w-50 d-inline">
+						</li>
+						<li class="list-group-item"><strong>💵 총결제금액:</strong> <span id="totalPrice">${productDTO.productPrice}</span> 원</li>
+					</ul>
+					<div class="d-flex justify-content-center mt-3">
+						<button id="productListInfo" class="btn btn-outline-success w-75">💳 결제하기</button>
+					</div>
+					<div class="d-flex justify-content-center mt-2">
+						<button id="insertCart" class="btn btn-info w-75">🛍️ 장바구니 담기</button>
+					</div>
                 </div>
             </div>
         </div>
@@ -84,7 +74,7 @@
             $('#totalCount').on('input', function() {
                 let count = $(this).val();
                 let price = ${productDTO.productPrice};
-                $('#totalPayment').text(price * count);
+                $('#totalPrice').text(price * count);
             });
 
             $('#toggleDetails').click(function() {
@@ -96,11 +86,16 @@
             	let csrfToken = $("meta[name='_csrf']").attr("content");
             	let csrfHeader = $("meta[name='_csrf_header']").attr("content");
             	
+            	if($('#totalCount').val() < 1){
+            		alert("상품 수량이 1보다 작습니다.");
+            		return;
+            	}
+            	
             	let cartDTO = {
           			cartProductName: "${productDTO.productName}",
       				cartProductPrice: ${productDTO.productPrice},
       				cartCount: $('#totalCount').val(),
-      				cartTotalPrice: $('#totalPayment').text(),
+      				cartTotalPrice: $('#totalPrice').text(),
       				productId: ${productDTO.productId}
             	}
             	
@@ -121,9 +116,47 @@
                         alert("장바구니 추가 중 오류가 발생했습니다.");
                     }
             	})
-            	
             });
             
+            $('#productListInfo').on('click', function() {
+            	let productList = [];
+            	let count = $('#totalCount').val();
+            	let price = $("#totalPrice").text();
+            	
+            	if(count < 1){
+            		alert("상품 수량이 1보다 작습니다.");
+            		return;
+            	}
+            	
+            	productList.push({
+					productId: ${productDTO.productId},
+					productName: "${productDTO.productName}",
+					productPrice: ${productDTO.productPrice},
+					productPayTotalCount: count,
+					productTotalPrice: price
+				});
+  
+            	
+            	
+            	let csrf = document.querySelector('meta[name="_csrf"]').content;
+				let csrf_header = document.querySelector('meta[name="_csrf_header"]').content;
+				
+	            fetch("/product/productListInfo",{
+	            	method: "POST",
+	            	headers: { "Content-Type": "application/json",
+	            		[csrf_header]: csrf
+	            	},
+	            	body: JSON.stringify(productList)
+	            })
+	            .then(response => response.json())
+	            .then(data => 
+		            {window.location.href = data.redirectUrl}
+	            )
+	            .catch(error => {
+	                console.error("에러 발생:", error);
+	                alert("결제 페이지 이동 중 오류가 발생했습니다.");
+	            });
+            });
         });
     </script>
 </body>

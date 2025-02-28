@@ -14,4 +14,7 @@ public interface CartDAO {
 
 	// 장바구니 추가
 	void insertCart(CartDTO cartDTO);
+
+	// 장바구니 삭제
+	void deleteCart(Integer cartId);
 }

@@ -98,11 +98,17 @@
 	
 	<update id="updateProductOrdersComplete" parameterType="ProductDTO">
 		UPDATE PRODUCT
-	    SET 
+	    SET
 	        PRODUCT_STOCK = #{productStock},
 	        PRODUCT_TOTALSALESCOUNT = #{productTotalSalesCount},
 	        PRODUCT_UPDATE = SYSDATE
 	    WHERE 
 	        PRODUCT_ID = #{productId}
 	</update>
+	
+	<select id="selectProductStockByProductId" parameterType="Integer">
+		SELECT PRODUCT_STOCK
+		FROM PRODUCT
+		WHERE PRODUCT_ID = #{productId}
+	</select>
 </mapper>

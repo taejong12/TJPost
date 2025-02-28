@@ -12,4 +12,7 @@ public interface CartService {
 	// 장바구니 추가
 	void insertCart(CartDTO cartDTO);
 
+	// 장바구니 삭제
+	void deleteCart(List<Integer> cartIdList);
+
 }

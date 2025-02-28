@@ -37,4 +37,7 @@ public interface ProductDAO {
 	// 결제 완료 상품 재고 수정
 	public void updateProductOrdersComplete(ProductDTO productDTO);
 
+	// 상품 재고 조회
+	public int selectProductStockByProductId(Integer productId);
+
 }

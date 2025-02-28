@@ -108,18 +108,36 @@ public class ProductController {
 		return "user/product/productDetail";
 	}
 
-	// 상품 결제페이지
+	// 상품목록 저장
+	@PostMapping("/productListInfo")
+	public ResponseEntity<Map<String, String>> productListInfo(@RequestBody List<ProductDTO> productList, HttpSession session) {
+	
+		session.setAttribute("productList", productList);
+
+		Map<String, String> response = new HashMap<>();
+	    response.put("redirectUrl", "/product/pay");
+
+		return ResponseEntity.ok(response);
+	}
+
+	// 상품 결제 페이지
 	@GetMapping("/pay")
-	public String productPayPage(@ModelAttribute ProductDTO productDTO, Model model) {
-		List<FileDTO> fileList = fileService.selectFileListByProductId(productDTO.getProductId());
-		AddressDTO addressDTO = addressService.selectAddressByDefaultAddress();
-		List<ProductDTO> productList = new ArrayList<ProductDTO>();
+	public String productPayPage(Model model, HttpSession session) {
 		
-		productList.add(productDTO);
+		List<ProductDTO> productList = (List<ProductDTO>) session.getAttribute("productList");
+		
+		if(productList == null) {
+			return "redirect:/";
+		}
+		
+		List<FileDTO> fileList = fileService.selectFileListByProductIdAll();
+		AddressDTO addressDTO = addressService.selectAddressByDefaultAddress();
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("addressDTO", addressDTO);
+		
+		session.removeAttribute("productList");
 		return "user/product/productPay";
 	}
 

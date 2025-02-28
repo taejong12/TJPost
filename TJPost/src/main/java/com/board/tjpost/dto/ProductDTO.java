@@ -26,6 +26,6 @@ public class ProductDTO {
 
 	// 결제관련
 	private int productPayTotalCount; // 총 결제갯수
-	private int productTotalPayment; // 총 결제금액
+	private int productTotalPrice; // 총 결제금액
 	private String productPaymentMethod; // 결제수단
 }

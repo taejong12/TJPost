@@ -42,4 +42,11 @@ public class CartController {
 		cartService.insertCart(cartDTO);
 		return ResponseEntity.ok("장바구니에 추가되었습니다.\n장바구니 목록으로 이동하시겠습니까?");
 	}
+	
+	// 장바구니 삭제
+	@PostMapping("/delete")
+	public ResponseEntity<String> deleteCart(@RequestBody List<Integer> cartIdList) {
+		cartService.deleteCart(cartIdList);
+		return ResponseEntity.ok("장바구니 삭제되었습니다.");
+	}
 }

@@ -27,4 +27,10 @@
 			#{productId}
 		)
 	</insert>
+	
+	<delete id="deleteCart" parameterType="Integer">
+		DELETE FROM CART
+		WHERE CART_ID = #{cartId}
+	</delete>
+
 </mapper>

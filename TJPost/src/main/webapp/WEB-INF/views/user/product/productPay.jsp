@@ -34,16 +34,22 @@
 				                    <input type="hidden" id="productId" name="productId" value="${product.productId}">
 				                </td>
 				
-				                <!-- 이미지 -->
+								<!-- 이미지 -->
 				                <td class="align-middle">
 				                    <c:if test="${not empty fileList}">
-				                        <img src="/img/product/${fileList[0].fileName}" 
-				                             alt="상품이미지" 
-				                             class="img-fluid rounded" 
-				                             style="max-width: 100px; height: auto;">
+				                    	<c:set var="imagePrinted" value="false"/>
+				                    	<c:forEach var="file" items="${fileList}">
+				                    		<c:if test="${file.productId == product.productId && !imagePrinted}">
+						                        <img src="/img/product/${file.fileName}" 
+						                             alt="상품이미지" 
+						                             class="img-fluid rounded" 
+						                             style="max-width: 100px; height: auto;">
+						                    	<c:set var="imagePrinted" value="true"/>
+				                    		</c:if>
+				                    	</c:forEach>
 				                    </c:if>
 				                </td>
-				
+								
 				                <!-- 상품명 -->
 				                <td class="align-middle" id="productName">${product.productName}</td>
 				
@@ -66,7 +72,7 @@
 				
 				                <!-- 총 가격 -->
 				                <td class="align-middle fw-bold text-danger" id="totalPrice">
-				                    ${product.productPrice * product.productPayTotalCount}원
+				                    ${product.productTotalPrice}원
 				                </td>
 				            </tr>
 				        </c:forEach>
@@ -130,7 +136,7 @@
 	                let productId = parseInt(row.querySelector("#productId").value);
 	              
 	             	// 재고보다 많으면 재고 수량으로 변경
-	                if(parseInt(countRow.value)>productStock){
+	                if(parseInt(countRow.value) > productStock){
 	                	countRow.value = productStock;
 	                }
 	                
@@ -174,7 +180,7 @@
 	
 	        // 페이지 로드 시 초기 총 가격 계산
 	        updateTotal();
-	
+
 	        // 수량 변경 시 가격 자동 업데이트
 	        document.querySelectorAll("#count").forEach((input) => {
 	            input.addEventListener("input", updateTotal);
@@ -247,9 +253,7 @@
 	                console.error("에러 발생:", error);
 	                alert("결제 처리 중 오류가 발생했습니다.");
 	            });
-	            
 	        });
-	     	
 	    });
         
      	// 부모 창에서 주소를 설정하는 함수 (결제 페이지)
