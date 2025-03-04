@@ -19,4 +19,5 @@ public class FileDTO {
     private String memberId; // 회원아이디
     private Integer boardId; // 공지사항번호
     private Integer productId; // 상품번호
+    private Integer reviewId; // 구매후기번호
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.board.tjpost.dto.OrdersDTO;
 import com.board.tjpost.dto.OrdersDetailDTO;
+import com.board.tjpost.dto.ReviewDTO;
 
 @Mapper
 public interface OrdersDAO {
@@ -46,5 +47,8 @@ public interface OrdersDAO {
 
 	// 관리자 주문상세내역 환불승인
 	void adminOrdersDetailReturn(Integer ordersId);
+
+	// 구매후기 작성 업데이트
+	void updateOrdersDetailReviewId(ReviewDTO reviewDTO);
 
 }

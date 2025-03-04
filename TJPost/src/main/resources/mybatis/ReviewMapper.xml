@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"file:/C:/Users/dbxow/git/TJPost/TJPost/src/main/resources/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.tjpost.dao.ReviewDAO">
+	<select id="selectReviewListPaging" parameterType="map" resultType="ReviewDTO">
+		SELECT *
+		FROM (	
+			SELECT A.*, ROWNUM AS rnum 
+			FROM
+				(SELECT *
+				FROM REVIEW
+				ORDER BY REVIEW_CREATE DESC) A
+				<![CDATA[
+			WHERE ROWNUM <= #{endRow}
+			)
+		WHERE rnum >= #{startRow}
+		]]>
+	</select>
+	
+	<select id="selectReviewListTotalCount">
+		SELECT COUNT(*)
+		FROM REVIEW
+	</select>
+	
+	<select id="selectReviewDtailByReviewId" parameterType="Integer">
+		SELECT *
+		FROM REVIEW
+		WHERE REVIEW_ID = #{reviewId}
+	</select>
+	
+	<insert id="insertReview" parameterType="ReviewDTO" useGeneratedKeys="true" keyProperty="reviewId" keyColumn="REVIEW_ID">
+		INSERT INTO REVIEW(
+			REVIEW_TITLE,
+			REVIEW_CONTENT,
+			REVIEW_SCORE,
+			MEMBER_ID,
+			ORDERS_DETAIL_ID
+		)
+		values(
+			#{reviewTitle},
+			#{reviewContent},
+			#{reviewScore},
+			#{memberId},
+			#{ordersDetailId}
+		)
+	</insert>
+	
+</mapper>

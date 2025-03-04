@@ -68,6 +68,10 @@ public class OrdersController {
 	public String ordersDetailPage(@PathVariable Integer ordersId, Model model) {
 		List<OrdersDetailDTO> ordersDetailList = ordersService.selectOrdersDetailListByOrdersId(ordersId);
 		List<FileDTO> fileList = fileService.selectFileListByProductIdAll();
+		
+		for(OrdersDetailDTO a:ordersDetailList) {
+			System.out.println("구매후기 번호 확인: "+a.getReviewId());
+		}
 		model.addAttribute("ordersDetailList", ordersDetailList);
 		model.addAttribute("fileList", fileList);
 		return "user/orders/ordersDetail";

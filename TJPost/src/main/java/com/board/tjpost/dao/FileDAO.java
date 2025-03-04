@@ -32,4 +32,13 @@ public interface FileDAO {
 	// 상품 파일 삭제
 	void deleteProductFileByProductId(Integer productId);
 
+	// 구매후기 파일 등록
+	void insertReviewFile(FileDTO fileDTO);
+
+	// 구매후기 파일 조회
+	List<FileDTO> selectFileListByReviewId(Integer reviewId);
+
+	// 구매후기 전체파일 조회
+	List<FileDTO> selectFileListByReviewIdAll();
+
 }

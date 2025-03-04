@@ -40,4 +40,15 @@ public class FileServiceImpl implements FileService {
 		return fileDAO.selectFileListByProductId(productId);
 	}
 
+	// 구매후기 파일 조회
+	public List<FileDTO> selectFileListByReviewId(Integer reviewId) {
+		return fileDAO.selectFileListByReviewId(reviewId);
+	}
+
+
+	// 구매후기 전체파일 조회
+	public List<FileDTO> selectFileListByReviewIdAll() {
+		return fileDAO.selectFileListByReviewIdAll();
+	}
+
 }

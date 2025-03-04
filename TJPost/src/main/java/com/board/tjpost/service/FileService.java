@@ -18,4 +18,10 @@ public interface FileService {
 	// 상품 파일 아이디 조회
 	List<FileDTO> selectFileListByProductId(Integer productId);
 
+	// 구매후기 파일 조회
+	List<FileDTO> selectFileListByReviewId(Integer reviewId);
+
+	// 구매후기 전체파일 조회
+	List<FileDTO> selectFileListByReviewIdAll();
+
 }

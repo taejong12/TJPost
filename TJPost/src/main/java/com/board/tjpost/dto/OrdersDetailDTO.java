@@ -22,6 +22,7 @@ public class OrdersDetailDTO {
 	private Integer ordersId; // 주문번호
 	private Integer productId; // 상품번호
 	private Integer deliveryId; // 배달번호
+	private Integer reviewId; // 구매후기번호
 	
 	// 상품 재고 업데이트
 	private int productStock;

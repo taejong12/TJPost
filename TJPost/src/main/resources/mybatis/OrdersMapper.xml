@@ -116,4 +116,10 @@
 		WHERE ORDERS_ID = #{ordersId}
 	</update>
 	
+	<update id="updateOrdersDetailReviewId" parameterType="ReviewDTO">
+		UPDATE ORDERS_DETAIL
+		SET REVIEW_ID = #{reviewId}
+		WHERE ORDERS_DETAIL_ID = #{ordersDetailId}
+	</update>
+	
 </mapper>

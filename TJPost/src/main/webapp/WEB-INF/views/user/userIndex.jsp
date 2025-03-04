@@ -70,6 +70,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">이벤트</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/review/listPaging">구매후기</a>
+                </li>
                 <!-- 관리자 페이지 (권한 체크) -->
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li class="nav-item">

@@ -66,4 +66,29 @@
 		WHERE PRODUCT_ID = #{productId}
 	</delete>
 
+	<insert id="insertReviewFile" parameterType="FileDTO">
+        INSERT INTO COMMON_FILE (
+            FILE_NAME,
+            FILE_PATH,
+            FILE_ORIGINALNAME,
+            REVIEW_ID
+        ) VALUES (
+            #{fileName},
+            #{filePath},
+            #{fileOriginalName},
+            #{reviewId}
+        )
+    </insert>
+
+	<select id="selectFileListByReviewId" resultType="FileDTO">
+		SELECT *
+		FROM COMMON_FILE
+		WHERE REVIEW_ID = #{reviewId}
+	</select>
+
+	<select id="selectFileListByReviewIdAll" resultType="FileDTO">
+		SELECT *
+		FROM COMMON_FILE
+		WHERE REVIEW_ID IS NOT NULL
+	</select>
 </mapper>
